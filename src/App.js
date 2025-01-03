@@ -13,6 +13,12 @@ import ClientsReg from "./components/CustomeAuth/ClientsReg"
 import CleanersReg from "./components/CustomeAuth/CleanersReg"
 import Register from "./components/CustomeAuth/Register"
 import SignIn from "./components/CustomeAuth/SignIn"
+import PersonalDetails from "./components/CleanersDashboard/PersonalDetails"
+import ServiceSection from "./components/CleanersDashboard/ServiceSection"
+import ServiceLocationYearsAvailability from "./components/CleanersDashboard/ServiceLocationYearsAvailability"
+import MyBio from "./components/CleanersDashboard/MyBio"
+import ProfileDashboard from "./components/CleanersDashboard/ProfileDashboard"
+
 
 
 
@@ -45,18 +51,26 @@ function App() {
         <Route path="/cleaner-reg" element={<CleanersReg />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/sign" element={<SignIn />} />
+        <Route path="/profile" element={<ProfileDashboard />} />
         
         
-        
-        
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
+        <Route path="/dashboard"element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>  }
         />
+
+        <Route>
+        <Route path="/personal-details" element={<PersonalDetails />} />
+        <Route path="/service-section" element={<ServiceSection />} />
+        <Route path="/service-location" element={<ServiceLocationYearsAvailability />} />
+        <Route path="/bio" element={<MyBio />} />
+        
+        
+        
+        </Route>
+
+
+
+
+
       </Routes>
       <ToastContainer /> {/* Add ToastContainer to render the toasts */}
     </Router>

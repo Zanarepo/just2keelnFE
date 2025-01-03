@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { supabase } from '../../supabaseClient';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,6 +9,7 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('service-provider');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -34,9 +36,14 @@ const SignIn = () => {
         return;
       }
 
-     
+      // Store email in localStorage for profile retrieval
+      localStorage.setItem('email', email);
 
+      // Display success message
       toast.success(`Welcome, ${data.full_name}!`);
+
+      // Redirect to /profiles
+      navigate('/profile');
     } catch (err) {
       toast.error('An error occurred during login.');
       console.error(err);
@@ -47,7 +54,7 @@ const SignIn = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <ToastContainer />
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold text-center text-gray-800">Sign In</h1>
+        <h1 className="text-lg font-semibold text-green-500 mb-4 text-center">Sign In</h1>
         <form onSubmit={handleSignIn} className="mt-6">
           <div className="mb-4">
             <label htmlFor="userType" className="block text-sm font-medium text-gray-700">
@@ -95,7 +102,7 @@ const SignIn = () => {
 
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-600"
           >
             Sign In
           </button>

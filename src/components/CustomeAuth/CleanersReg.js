@@ -1,123 +1,163 @@
 import React, { useState } from 'react';
-import { supabase } from '../../supabaseClient';
 import CryptoJS from 'crypto-js';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toast styles
+import { supabase } from '../../supabaseClient'; // Your supabase client import
 
-const SignIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('service-provider');
+const CleanerRegistration = () => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    password: '',
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [isRegistering, setIsRegistering] = useState(false); // To manage loading state
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    // Table mapping based on userType
-    const tableMapping = {
-      'service-provider': 'cleaners_main_profiles',
-      client: 'client_main_profiles',
-      admin: 'admin',
-    };
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
-    const tableName = tableMapping[userType];
+  const handleRegister = async () => {
+    const { fullName, email, phoneNumber, address, password } = formData;
+
+    // Validation
+    let validationErrors = {};
+    if (!fullName) validationErrors.fullName = 'Full Name is required';
+    if (!email) validationErrors.email = 'Email is required';
+    if (!phoneNumber) validationErrors.phoneNumber = 'Phone Number is required';
+    if (!address) validationErrors.address = 'Address is required';
+    if (!password) validationErrors.password = 'Password is required';
+    
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast.error('Please fill all required fields.'); // Trigger error toast
+      return;
+    }
+
+    setIsRegistering(true); // Start the registration process
 
     try {
-      // Fetch user details from the appropriate table
-      const { data, error } = await supabase
-        .from(tableName)
-        .select('id, email, password, full_name')
-        .eq('email', email)
-        .single();
+      // Hash the password using CryptoJS (SHA-256 in this case)
+      const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
 
-      if (error || !data) {
-        toast.error('User not found or incorrect email.');
-        return;
+      // Insert cleaner's profile in the database
+      const { error } = await supabase
+        .from('cleaners_main_profiles')
+        .insert([
+          {
+            full_name: fullName,
+            email,
+            phone_number: phoneNumber,
+            address,
+            password: hashedPassword,
+          },
+        ]);
+
+      if (error) {
+        throw error;
       }
 
-      // Replace this block where the password is hashed
-const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+      toast.success('Cleaner registered successfully!'); // Trigger success toast
 
-if (hashedPassword !== data.password) {
-  toast.error('Invalid password.');
-  return;
-}
-
-      toast.success(`Welcome, ${data.full_name}!`);
-    } catch (err) {
-      toast.error('An error occurred during login.');
-      console.error(err);
+      // Display delayed email verification message after 3 seconds
+      setTimeout(() => {
+        toast.info('Please check your email for a confirmation link.');
+      }, 3000); // 3-second delay
+    } catch (error) {
+      toast.error(`Error registering cleaner: ${error.message}`); // Trigger error toast if there's an issue
+    } finally {
+      setIsRegistering(false); // End the registration process
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <ToastContainer />
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold text-center text-gray-800">Sign In</h1>
-        <form onSubmit={handleSignIn} className="mt-6">
-          <div className="mb-4">
-            <label htmlFor="userType" className="block text-sm font-medium text-gray-700">
-              User Type
-            </label>
-            <select
-              id="userType"
-              value={userType}
-              onChange={(e) => setUserType(e.target.value)}
-              className="block w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-            >
-              <option value="service-provider">Service Provider</option>
-              <option value="client">Client</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
+    <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+      <h2 className="text-lg font-semibold text-green-500 mb-4 text-center">Cleaner Registration</h2>
+      
+      {/* Full Name */}
+      <input
+        type="text"
+        name="fullName"
+        placeholder="Full Name"
+        value={formData.fullName}
+        onChange={handleInputChange}
+        className={`w-full p-3 border ${errors.fullName ? 'border-red-500' : 'border-gray-300'} rounded-md mb-4`}
+      />
+      {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
 
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="block w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-            />
-          </div>
+      {/* Email */}
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleInputChange}
+        className={`w-full p-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md mb-4`}
+      />
+      {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="block w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-            />
-          </div>
+      {/* Phone Number */}
+      <input
+        type="text"
+        name="phoneNumber"
+        placeholder="Phone Number"
+        value={formData.phoneNumber}
+        onChange={handleInputChange}
+        className={`w-full p-3 border ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'} rounded-md mb-4`}
+      />
+      {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
 
-          <button
-            type="submit"
-            className="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
-          >
-            Sign In
-          </button>
-        </form>
+      {/* Address */}
+      <input
+        type="text"
+        name="address"
+        placeholder="Address"
+        value={formData.address}
+        onChange={handleInputChange}
+        className={`w-full p-3 border ${errors.address ? 'border-red-500' : 'border-gray-300'} rounded-md mb-4`}
+      />
+      {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
 
-        <div className="mt-4 text-center">
-          <a
-            href="/forgot-password"
-            className="text-sm text-blue-600 hover:underline"
-          >
-            Forgot Password?
-          </a>
-        </div>
+      {/* Password */}
+      <div className="relative mb-4">
+        <input
+          type={showPassword ? 'text' : 'password'}
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleInputChange}
+          className={`w-full p-3 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md`}
+        />
+        <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-500"
+        >
+          {showPassword ? 'Hide' : 'Show'}
+        </button>
       </div>
+      {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+
+      <button
+        onClick={handleRegister}
+        className="w-full bg-green-500 text-white py-3  mb-4 text-center rounded-md font-semibold hover:bg-green-600"
+        disabled={isRegistering} // Disable button while registering
+      >
+        {isRegistering ? 'Registering...' : 'Register as Cleaner'}
+      </button>
+
+      {/* Toast Container */}
+      <ToastContainer /> {/* Make sure to include ToastContainer to display toasts */}
     </div>
   );
 };
 
-export default SignIn;
+export default CleanerRegistration;
