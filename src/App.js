@@ -19,8 +19,8 @@ import ServiceLocationYearsAvailability from "./components/CleanersDashboard/Ser
 import MyBio from "./components/CleanersDashboard/MyBio"
 import ProfileDashboard from "./components/CleanersDashboard/ProfileDashboard"
 
-
-
+import ProfileVerification from "./components/ProfileVerifications/ProfileVerification"
+import BookingForm from "./components/BookingsProcess/BookingForm"
 
 
 
@@ -62,11 +62,14 @@ function App() {
         <Route path="/service-section" element={<ServiceSection />} />
         <Route path="/service-location" element={<ServiceLocationYearsAvailability />} />
         <Route path="/bio" element={<MyBio />} />
-        
-        
-        
+        <Route path="/profile-verification" element={<ProfileVerification />} />
         </Route>
 
+        <Route>
+
+        <Route path="/booking" element={<BookingForm />} />
+        </Route>
+        
 
 
 

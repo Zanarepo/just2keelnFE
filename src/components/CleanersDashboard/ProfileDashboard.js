@@ -6,6 +6,7 @@ import ServiceSection from './ServiceSection';
 import ServiceLocationYearsAvailability from './ServiceLocationYearsAvailability';
 import PersonalDetails from './PersonalDetails';
 import MyBio from './MyBio';
+import ProfileVerificationPopup from '../ProfileVerifications/ProfileVerificationPopup';
 
 const ProfileDashboard = () => {
   const [activeTab, setActiveTab] = useState('personalDetails');
@@ -83,6 +84,7 @@ const ProfileDashboard = () => {
               }`}
             >
               Personal Details
+            {/*  */} <ProfileVerificationPopup/>
             </button>
             <button
               onClick={() => setActiveTab('serviceSection')}

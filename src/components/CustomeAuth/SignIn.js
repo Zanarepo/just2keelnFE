@@ -13,16 +13,16 @@ const SignIn = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-
+  
     // Table mapping based on userType
     const tableMapping = {
       'service-provider': 'cleaners_main_profiles',
-      client: 'client_main_profiles',
+      client: 'clients_main_profiles',
       admin: 'admin',
     };
-
+  
     const tableName = tableMapping[userType];
-
+  
     try {
       // Fetch user details from the appropriate table
       const { data, error } = await supabase
@@ -30,18 +30,28 @@ const SignIn = () => {
         .select('id, email, password, full_name')
         .eq('email', email)
         .single();
-
+  
       if (error || !data) {
         toast.error('User not found or incorrect email.');
         return;
       }
-
-      // Store email in localStorage for profile retrieval
+  
+      // Store common email in localStorage
       localStorage.setItem('email', email);
-
+  
+      // Store specific user type email
+      if (userType === 'service-provider') {
+        localStorage.setItem('cleaner_email', email);
+      } else if (userType === 'client') {
+        localStorage.setItem('client_email', email);
+      }
+  
+      // Store user type for future reference
+      localStorage.setItem('user_type', userType);
+  
       // Display success message
       toast.success(`Welcome, ${data.full_name}!`);
-
+  
       // Redirect to /profiles
       navigate('/profile');
     } catch (err) {
@@ -49,7 +59,7 @@ const SignIn = () => {
       console.error(err);
     }
   };
-
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <ToastContainer />
