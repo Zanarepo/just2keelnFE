@@ -52,8 +52,14 @@ const SignIn = () => {
       // Display success message
       toast.success(`Welcome, ${data.full_name}!`);
   
-      // Redirect to /profiles
-      navigate('/profile');
+      // Redirect to appropriate dashboard based on user type
+      if (userType === 'client') {
+        navigate('/clientdashboard'); // Redirect to Client Dashboard
+      } else if (userType === 'admin') {
+        navigate('/admindashboard'); // Redirect to Admin Dashboard
+      } else {
+        navigate('/profile'); // Default to service-provider profile
+      }
     } catch (err) {
       toast.error('An error occurred during login.');
       console.error(err);

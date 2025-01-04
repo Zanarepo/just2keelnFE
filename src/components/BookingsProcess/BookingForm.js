@@ -45,7 +45,7 @@ const handleSearch = async () => {
 
   const { data, error } = await supabase
     .from('cleaners_main_profiles')
-    .select('id, full_name, address, profile_picture_url, states_of_residence, specialization')
+    .select('id, full_name, address, profile_picture_url, states_of_residence, specialization, bio')
     .ilike('service_locations', `%${location}%`);
 
   if (error) {
@@ -225,7 +225,12 @@ return (
       </div>
     ) : (
       <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-semibold text-green-600 mb-4">Providers Available in Your Area</h2>
+        <div className="text-center">
+        <h2 className="text-2xl font-semibold text-green-600 mb-4">
+            Providers Available in Your Area
+        </h2>
+        </div>
+
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {providers.map((provider) => (
             <div
@@ -240,6 +245,7 @@ return (
                   className="w-32 h-32 rounded-full mx-auto object-cover mb-2"
                 />
                 <h4 className="text-lg font-semibold">{provider.full_name}</h4>
+                
                 <p className="text-gray-600">{provider.address}</p>
                 <p className="text-sm text-gray-500">Specialization: {provider.specialization || 'N/A'}</p>
                 <p className="text-sm text-gray-500">State of Residence: {provider.states_of_residence || 'N/A'}</p>

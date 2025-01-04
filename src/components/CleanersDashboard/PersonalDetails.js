@@ -3,6 +3,7 @@ import { supabase } from "../../supabaseClient";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const PersonalDetails = () => {
   const [details, setDetails] = useState({
     full_name: '',
@@ -133,21 +134,26 @@ const PersonalDetails = () => {
 
 
   return (
+    
     <div className="flex justify-center items-center min-h-screen bg-white pt-4">
+       
       <div className="p-8 bg-white rounded-lg shadow-xl w-full sm:max-w-lg">
-        <h2 className="text-2xl font-semibold mb-6 text-center text-green-500">Personal Details</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-center text-green-500">Personal Details </h2>
   
         {/* Avatar and Name Section */}
         <div className="flex justify-center items-center flex-col mb-6">
           {/* Display the profile picture or default avatar */}
           <div className="w-36 h-36 rounded-full overflow-hidden mb-4 shadow-lg">
+          
             <img
               src={profilePicPreview || details.profile_picture_url || "/path-to-default-avatar.jpg"}
               alt="Profile Avatar"
               className="w-full h-full object-cover"
+              
             />
+       
           </div>
-  
+         
           {/* User Full Name */}
           {isEditing ? (
             <input

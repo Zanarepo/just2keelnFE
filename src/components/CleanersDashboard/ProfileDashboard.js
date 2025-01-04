@@ -7,9 +7,10 @@ import ServiceLocationYearsAvailability from './ServiceLocationYearsAvailability
 import PersonalDetails from './PersonalDetails';
 import MyBio from './MyBio';
 import ProfileVerificationPopup from '../ProfileVerifications/ProfileVerificationPopup';
+import PublicDashboard from './PublicDashboard'; // Import PublicDashboard component
 
 const ProfileDashboard = () => {
-  const [activeTab, setActiveTab] = useState('personalDetails');
+  const [activeTab, setActiveTab] = useState('publicDashboard'); // Set the default tab to 'publicDashboard'
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -54,6 +55,8 @@ const ProfileDashboard = () => {
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'publicDashboard':
+        return <PublicDashboard />; // Render PublicDashboard for the public tab
       case 'personalDetails':
         return <PersonalDetails profileData={profileData} />;
       case 'serviceSection':
@@ -78,13 +81,20 @@ const ProfileDashboard = () => {
         <nav className="border-t border-b">
           <div className="flex justify-around py-2">
             <button
+              onClick={() => setActiveTab('publicDashboard')}
+              className={`py-2 px-8 text-sm font-semibold ${
+                activeTab === 'publicDashboard' ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'
+              }`}
+            >
+              Public Dashboard
+            </button>
+            <button
               onClick={() => setActiveTab('personalDetails')}
               className={`py-2 px-8 text-sm font-semibold ${
                 activeTab === 'personalDetails' ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'
               }`}
             >
-              Personal Details
-            {/*  */} <ProfileVerificationPopup/>
+              Personal Details  {/*  */} <ProfileVerificationPopup/>
             </button>
             <button
               onClick={() => setActiveTab('serviceSection')}

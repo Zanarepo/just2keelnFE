@@ -21,8 +21,23 @@ import ProfileDashboard from "./components/CleanersDashboard/ProfileDashboard"
 
 import ProfileVerification from "./components/ProfileVerifications/ProfileVerification"
 import BookingForm from "./components/BookingsProcess/BookingForm"
-
-
+ import PublicDashboard from "./components/CleanersDashboard/PublicDashboard"
+  import CleanerReviews from "./components/BookingsProcess/CleanerReviews"
+import ClientProfile from "./components/ClientProfile/ClientProfile"
+import BookingsSection  from "./components/ClientProfile/BookingsSection"
+import ReviewPromptSection from "./components/ClientProfile/ReviewPromptSection"
+import ClientDashboard from "./components/ClientProfile/ClientDashboard"
+import PaymentsSection from "./components/ClientProfile/PaymentsSection"
+import AdminCleanersDashboard from "./components/AdminDashboard/AdminCleanersDashboard"
+import ManageReviews from "./components/AdminDashboard/ManageReviews"
+import ManageCleanersVerification from "./components/AdminDashboard/ManageCleanersVerification"
+import ManagePayments from "./components/AdminDashboard/ManagePayments"
+import ProvidersDashboard from "./components/AdminDashboard/ProvidersDashboard"
+import ClientList from  "./components/ClientsActivities/ClientList"
+import ClientSubscriptions from "./components/ClientsActivities/ClientSubscriptions"
+import ClientSchedules from "./components/ClientsActivities/ClientSchedules"
+import ClientCleanerMatch from "./components/ClientsActivities/ClientCleanerMatch"
+  
 
 
 
@@ -68,8 +83,62 @@ function App() {
         <Route>
 
         <Route path="/booking" element={<BookingForm />} />
+        
+        <Route path="/public-dashboard" element={<PublicDashboard />} />
+        <Route path="/cleaner-reviews" element={<CleanerReviews />} />
+        <Route path="/prompt-review" element={<ReviewPromptSection />} />
+        <Route path="/clientdashboard" element={<ClientDashboard />} />
+        
+        
+        
+        
+        
         </Route>
         
+        <Route>
+
+<Route path="/client-profile" element={<ClientProfile />} />
+
+<Route path="/booking-section" element={<BookingsSection  />} />
+<Route path="/cleaner-reviews" element={<CleanerReviews />} />
+ <Route path="/client-payments" element={<PaymentsSection />} />
+
+
+
+</Route>
+        
+
+<Route>
+
+<Route path="/client-profile" element={<AdminCleanersDashboard />} />
+
+<Route path="/admincleanerdashboard" element={<AdminCleanersDashboard  />} />
+<Route path="/manage-reviews" element={<ManageReviews />} />
+ <Route path="/client-payments" element={<AdminCleanersDashboard />} />
+ <Route path="/cleaners-verify" element={<ManageCleanersVerification />} />
+  <Route path="/manage-payment" element={<ManagePayments />} />
+  <Route path="/providers-dashboard" element={<ProvidersDashboard />} />
+  
+</Route>
+        
+
+
+<Route>
+
+<Route path="/client-list" element={<ClientList />} />
+
+<Route path="/client-subscriptions" element={<ClientSubscriptions/>} />
+<Route path="/client-schedules" element={<ClientSchedules/>} />
+<Route path="/client-match" element={<ClientCleanerMatch/>} />
+
+  
+</Route>
+     
+
+
+
+
+
 
 
 
