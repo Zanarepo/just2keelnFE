@@ -81,9 +81,9 @@ const ClientProfile = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen w-full flex justify-center items-center ">
+    <div className="min-h-screen w-full flex justify-center items-start pt-8"> {/* Adjusted pt-8 for space from the top */}
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold text-center mb-6 text-green-600">Client Profile</h2>
+        <h2 className="text-2xl font-semibold text-center mb-6 text-green-500">Client Profile</h2>
         <form onSubmit={handleUpdateProfile}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="full_name">
@@ -99,7 +99,7 @@ const ClientProfile = () => {
               required
             />
           </div>
-
+  
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone_number">
               Phone Number
@@ -114,7 +114,7 @@ const ClientProfile = () => {
               required
             />
           </div>
-
+  
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
               Address
@@ -129,7 +129,7 @@ const ClientProfile = () => {
               required
             />
           </div>
-
+  
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
               Password
@@ -144,7 +144,7 @@ const ClientProfile = () => {
               required
             />
           </div>
-
+  
           <button
             type="submit"
             className={`w-full px-4 py-2 text-white font-semibold rounded-lg ${
@@ -158,6 +158,7 @@ const ClientProfile = () => {
       </div>
     </div>
   );
+  
 };
 
 export default ClientProfile;

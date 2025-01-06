@@ -105,7 +105,7 @@ const ClientCleanerMatch = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white-100 py-6 px-4">
+    <div className="min-h-screen bg-white py-6 px-4">
       {/* Add Schedule Modal Button */}
       <button
         onClick={() => setShowAddScheduleModal(true)}
@@ -117,15 +117,19 @@ const ClientCleanerMatch = () => {
       {/* Add Schedule Modal */}
       {showAddScheduleModal && (
         <div
-          className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-          onClick={() => setShowAddScheduleModal(false)}
+          className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+          onClick={() => {
+            setShowAddScheduleModal(false);
+            toast.info('Modal Closed');
+          }}
         >
           <div
-            className="modal-content bg-white p-6 rounded-md w-full max-w-lg sm:max-w-2xl space-y-4"
+            className="modal-content bg-white p-6 rounded-md w-11/12 sm:max-w-lg space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-xl  font-semibold mb-4 text-center">Add Schedule</h3>
+            <h3 className="text-xl font-semibold mb-4 text-center">Add Schedule</h3>
   
+            {/* Client Selection */}
             <div className="mb-4">
               <label htmlFor="client" className="block text-lg font-medium">Client</label>
               <select
@@ -143,6 +147,7 @@ const ClientCleanerMatch = () => {
               </select>
             </div>
   
+            {/* Cleaner Selection */}
             <div className="mb-4">
               <label htmlFor="cleaner" className="block text-lg font-medium">Cleaner</label>
               <select
@@ -160,6 +165,7 @@ const ClientCleanerMatch = () => {
               </select>
             </div>
   
+            {/* Service Type Selection */}
             <div className="mb-4">
               <label htmlFor="service-type" className="block text-lg font-medium">Service Type</label>
               <select
@@ -177,40 +183,49 @@ const ClientCleanerMatch = () => {
               </select>
             </div>
   
-            <div className="mb-4">
-              <label htmlFor="service-date" className="block text-lg font-medium">Service Date</label>
-              <input
-                type="date"
-                id="service-date"
-                value={serviceDate}
-                onChange={(e) => setServiceDate(e.target.value)}
-                className="mt-2 p-2 border rounded w-full"
-              />
+            {/* Service Date and Time */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label htmlFor="service-date" className="block text-lg font-medium">Service Date</label>
+                <input
+                  type="date"
+                  id="service-date"
+                  value={serviceDate}
+                  onChange={(e) => setServiceDate(e.target.value)}
+                  className="mt-2 p-2 border rounded w-full"
+                />
+              </div>
+              <div>
+                <label htmlFor="service-time" className="block text-lg font-medium">Service Time</label>
+                <input
+                  type="time"
+                  id="service-time"
+                  value={serviceTime}
+                  onChange={(e) => setServiceTime(e.target.value)}
+                  className="mt-2 p-2 border rounded w-full"
+                />
+              </div>
             </div>
   
-            <div className="mb-4">
-              <label htmlFor="service-time" className="block text-lg font-medium">Service Time</label>
-              <input
-                type="time"
-                id="service-time"
-                value={serviceTime}
-                onChange={(e) => setServiceTime(e.target.value)}
-                className="mt-2 p-2 border rounded w-full"
-              />
-            </div>
-  
+            {/* Action Buttons */}
             <div className="flex justify-between gap-4">
               <button
-                onClick={handleAddSchedule}
+                onClick={() => {
+                  handleAddSchedule();
+                  toast.success('Schedule Added Successfully!');
+                }}
                 className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 w-full sm:w-auto"
               >
-                Add Schedule   
+                Add+
               </button>
               <button
-                onClick={() => setShowAddScheduleModal(false)}
+                onClick={() => {
+                  setShowAddScheduleModal(false);
+                  toast.info('Modal Closed');
+                }}
                 className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 w-full sm:w-auto"
               >
-                Close
+                CloseX
               </button>
             </div>
           </div>
@@ -219,88 +234,97 @@ const ClientCleanerMatch = () => {
   
       {/* Schedules Table */}
       <div className="mb-8">
-        <h3 className="text-xl  text-green-500 mb-4 text-center font-semibold mb-4">Scheduled Services</h3>
-        <table className="min-w-full bg-white border border-gray-300 rounded-lg">
-          <thead>
-            <tr>
-              <th className="py-2 px-4">Client</th>
-              <th className="py-2 px-4">Cleaner</th>
-              <th className="py-2 px-4">Service Type</th>
-              <th className="py-2 px-4">Service Date</th>
-              <th className="py-2 px-4">Service Time</th>
-              <th className="py-2 px-4">Status</th>
-              <th className="py-2 px-4">Profiles</th>
-            </tr>
-          </thead>
-          <tbody>
-            {schedules.length === 0 ? (
+        <h2 className="text-xl text-green-500 text-center font-semibold mb-4">Match Clients to Services</h2>
+        <h3 className="text-xl text-green-500 text-center font-semibold mb-4">Scheduled Services</h3>
+  
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-300 rounded-lg">
+            <thead>
               <tr>
-                <td colSpan="7" className="text-center py-4">No schedules found.</td>
+                <th className="py-2 px-4">Client</th>
+                <th className="py-2 px-4">Cleaner</th>
+                <th className="py-2 px-4">Service Type</th>
+                <th className="py-2 px-4">Service Date</th>
+                <th className="py-2 px-4">Service Time</th>
+                <th className="py-2 px-4">Status</th>
+                <th className="py-2 px-4">Profiles</th>
               </tr>
-            ) : (
-              schedules.map((schedule) => (
-                <tr key={schedule.id}>
-                  <td className="py-2 px-4">{getClientNameById(schedule.client_id)}</td>
-                  <td className="py-2 px-4">{getCleanerNameById(schedule.cleaner_id)}</td>
-                  <td className="py-2 px-4">{schedule.service_type}</td>
-                  <td className="py-2 px-4">{schedule.service_date}</td>
-                  <td className="py-2 px-4">{schedule.service_time}</td>
-                  <td className="py-2 px-4">{schedule.status}</td>
-                  <td className="py-2 px-4">
-                    <button
-                      onClick={() => handleViewCleanerProfile(schedule.cleaner_id)}
-                      className="text-green-500 hover:underline"
-                    >
-                      View  Profile
-                    </button>
-                  </td>
+            </thead>
+            <tbody>
+              {schedules.length === 0 ? (
+                <tr>
+                  <td colSpan="7" className="text-center py-4">No schedules found.</td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                schedules.map((schedule) => (
+                  <tr key={schedule.id}>
+                    <td className="py-2 px-4">{getClientNameById(schedule.client_id)}</td>
+                    <td className="py-2 px-4">{getCleanerNameById(schedule.cleaner_id)}</td>
+                    <td className="py-2 px-4">{schedule.service_type}</td>
+                    <td className="py-2 px-4">{schedule.service_date}</td>
+                    <td className="py-2 px-4">{schedule.service_time}</td>
+                    <td className="py-2 px-4">{schedule.status}</td>
+                    <td className="py-2 px-4">
+                      <button
+                        onClick={() => handleViewCleanerProfile(schedule.cleaner_id)}
+                        className="text-green-500 hover:underline"
+                      >
+                        View Profile
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
   
-     {/* View Cleaner Profile Modal */}
-{modalVisible && selectedCleanerProfile && (
-  <div className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" onClick={() => setModalVisible(false)}>
-    <div className="modal-content bg-white p-6 rounded-md w-full sm:max-w-lg flex flex-col justify-between" onClick={(e) => e.stopPropagation()}>
-      
-      {/* Profile Content */}
-      <div className="text-center mb-4">
-        <img
-          src={selectedCleanerProfile.profile_picture_url}
-          alt={selectedCleanerProfile.full_name}
-          className="rounded-full w-32 h-32 mx-auto mb-4"
-        />
-        <h3 className="text-xl font-semibold mb-4">{selectedCleanerProfile.full_name}</h3>
-        <p><strong>Bio:</strong> {selectedCleanerProfile.bio}</p>
-        <p><strong>Address:</strong> {selectedCleanerProfile.address}</p>
-        <p><strong>Phone:</strong> {selectedCleanerProfile.phone_number}</p>
-        <p><strong>Location:</strong> {selectedCleanerProfile.service_locations}</p>
-        <p><strong>Residence:</strong> {selectedCleanerProfile.states_of_residence}</p>
-        
-      </div>
-
-      {/* Close Button */}
-      <div className="flex justify-center">
-        <button
-          onClick={() => setModalVisible(false)}
-          className="mt-4 bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 w-full sm:w-1/3"
+      {/* View Cleaner Profile Modal */}
+      {modalVisible && selectedCleanerProfile && (
+        <div
+          className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+          onClick={() => {
+            setModalVisible(false);
+            toast.info('Profile Modal Closed');
+          }}
         >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-      
+          <div
+            className="modal-content bg-white p-6 rounded-md w-11/12 sm:max-w-lg flex flex-col justify-between"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-center mb-4">
+              <img
+                src={selectedCleanerProfile.profile_picture_url}
+                alt={selectedCleanerProfile.full_name}
+                className="rounded-full w-32 h-32 mx-auto mb-4"
+              />
+              <h3 className="text-xl font-semibold mb-4">{selectedCleanerProfile.full_name}</h3>
+              <p><strong>Bio:</strong> {selectedCleanerProfile.bio}</p>
+              <p><strong>Address:</strong> {selectedCleanerProfile.address}</p>
+              <p><strong>Phone:</strong> {selectedCleanerProfile.phone_number}</p>
+              <p><strong>Location:</strong> {selectedCleanerProfile.service_locations}</p>
+              <p><strong>Residence:</strong> {selectedCleanerProfile.states_of_residence}</p>
+            </div>
+  
+            <div className="flex justify-center">
+              <button
+                onClick={() => {
+                  setModalVisible(false);
+                  toast.info('Profile Modal Closed');
+                }}
+                className="mt-4 bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 w-full sm:w-1/3"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
   
-
-
+  
 
   
 };

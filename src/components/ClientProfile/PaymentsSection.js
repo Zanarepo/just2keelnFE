@@ -35,8 +35,8 @@ const PaymentsSection = ({ clientId }) => {
   }
 
   return (
-    <div className="payments-section">
-      <h2 className="text-xl font-semibold mb-4">Payment History</h2>
+    <div className="payments-section mt-24"> {/* Added margin-top */}
+      <h2 className="text-2xl font-semibold text-center mb-6 text-green-500">Payment History</h2>
       <table className="w-full table-auto">
         <thead>
           <tr>
@@ -65,6 +65,7 @@ const PaymentsSection = ({ clientId }) => {
       </table>
     </div>
   );
+  
 };
 
 export default PaymentsSection;

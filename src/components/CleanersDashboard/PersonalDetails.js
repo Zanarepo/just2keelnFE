@@ -115,7 +115,7 @@ const PersonalDetails = () => {
       .eq('email', details.email);
 
     if (error) {
-      toast.error("Failed to update profile details");
+      //toast.error("Failed to update profile details");
     } else {
       toast.success("Profile updated successfully");
     }
@@ -132,28 +132,21 @@ const PersonalDetails = () => {
 
 
 
-
   return (
-    
-    <div className="flex justify-center items-center min-h-screen bg-white pt-4">
-       
-      <div className="p-8 bg-white rounded-lg shadow-xl w-full sm:max-w-lg">
-        <h2 className="text-2xl font-semibold mb-6 text-center text-green-500">Personal Details </h2>
-  
+    <div className="flex justify-center items-center min-h-screen bg-white pt-4 overflow-x-hidden">
+      <div className="p-8 bg-white rounded-lg shadow-xl w-full max-w-lg">
+        <h2 className="text-2xl font-semibold mb-6 text-center text-green-500">Personal Details</h2>
         {/* Avatar and Name Section */}
         <div className="flex justify-center items-center flex-col mb-6">
           {/* Display the profile picture or default avatar */}
           <div className="w-36 h-36 rounded-full overflow-hidden mb-4 shadow-lg">
-          
             <img
               src={profilePicPreview || details.profile_picture_url || "/path-to-default-avatar.jpg"}
               alt="Profile Avatar"
               className="w-full h-full object-cover"
-              
             />
-       
           </div>
-         
+  
           {/* User Full Name */}
           {isEditing ? (
             <input
@@ -173,13 +166,17 @@ const PersonalDetails = () => {
         <div className="space-y-4">
           {/* Email (display-only) */}
           <div className="bg-white p-4 rounded-lg shadow-md">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <p className="text-sm text-gray-600">{details.email}</p>
           </div>
   
           {/* Phone Number */}
           <div className="bg-white p-4 rounded-lg shadow-md">
-            <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone Number</label>
+            <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">
+              Phone Number
+            </label>
             {isEditing ? (
               <input
                 type="text"

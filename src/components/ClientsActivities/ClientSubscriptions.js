@@ -67,35 +67,35 @@ const ClientSubscriptions = () => {
   if (error) {
     return <div className="text-center text-red-500">{error}</div>;
   }
-
   return (
-    <div className="min-h-screen bg-white-100 py-6 px-4">
+    <div className="min-h-screen bg-white-100">
       <ToastContainer />
       <h2 className="text-2xl font-semibold text-green-500 mb-4 text-center">Client Subscriptions</h2>
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table className="min-w-full table-auto">
+  
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto border border-gray-200">
           <thead>
             <tr className="bg-gray-100">
-              <th className="py-2 px-4 text-left">Client Name</th>
-              <th className="py-2 px-4 text-left">Email</th>
-              <th className="py-2 px-4 text-left">Subscription Type</th>
-              <th className="py-2 px-4 text-left">Start Date</th>
-              <th className="py-2 px-4 text-left">End Date</th>
-              <th className="py-2 px-4 text-left">Upgrade</th>
+              <th className="py-2 text-left border-b border-gray-300">Client Name</th>
+              <th className="py-2 text-left border-b border-gray-300">Email</th>
+              <th className="py-2 text-left border-b border-gray-300">Subscription Type</th>
+              <th className="py-2 text-left border-b border-gray-300">Start Date</th>
+              <th className="py-2 text-left border-b border-gray-300">End Date</th>
+              <th className="py-2 text-left border-b border-gray-300">Upgrade</th>
             </tr>
           </thead>
           <tbody>
             {clientsWithSubscriptions.map((client) => (
               <tr key={client.id} className="border-b">
-                <td className="py-2 px-4">{client.clients_main_profiles.full_name}</td>
-                <td className="py-2 px-4">{client.clients_main_profiles.email}</td>
-                <td className="py-2 px-4">{client.subscription_type}</td>
-                <td className="py-2 px-4">{new Date(client.start_date).toLocaleDateString()}</td>
-                <td className="py-2 px-4">{new Date(client.end_date).toLocaleDateString()}</td>
-                <td className="py-2 px-4">
+                <td className="py-2">{client.clients_main_profiles.full_name}</td>
+                <td className="py-2">{client.clients_main_profiles.email}</td>
+                <td className="py-2">{client.subscription_type}</td>
+                <td className="py-2">{new Date(client.start_date).toLocaleDateString()}</td>
+                <td className="py-2">{new Date(client.end_date).toLocaleDateString()}</td>
+                <td className="py-2">
                   <button
                     onClick={() => handleUpgrade(client.client_id)}
-                    className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                    className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600"
                   >
                     Upgrade
                   </button>
@@ -107,6 +107,8 @@ const ClientSubscriptions = () => {
       </div>
     </div>
   );
+  
+  
 };
 
 export default ClientSubscriptions;

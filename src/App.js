@@ -37,17 +37,26 @@ import ClientList from  "./components/ClientsActivities/ClientList"
 import ClientSubscriptions from "./components/ClientsActivities/ClientSubscriptions"
 import ClientSchedules from "./components/ClientsActivities/ClientSchedules"
 import ClientCleanerMatch from "./components/ClientsActivities/ClientCleanerMatch"
-  
-
-
-
-
-
-
-
-
-
-
+import ClientServicesDashboard from "./components/ClientsActivities/ClientServicesDashboard"
+import About from "./components/Homepage/About"
+import HomePagesLayout from "./components/Homepage/HomePagesLayout"
+import  Home from "./components/Homepage/Home"
+import AdminLayout from "./components/Layouts/AdminLayout"
+import ProvidersLayout from './components/Layouts/ProvidersLayout';
+import ProfilePages from "./components/CleanersDashboard/ProfilePages"
+import CleanerSchedules from "./components/CleanersDashboard/CleanerSchedules"
+import CleanerBookings from "./components/CleanersDashboard/CleanerBookings"
+import RequestQuoteForm from "./components/QuotesDashboard/RequestQuoteForm"
+import SubmitBid from "./components/QuotesDashboard/SubmitBid"
+import Quotedashboard from "./components/CleanersDashboard/Quotedashboard"
+import CleanerQuoteDb   from "./components/CleanersDashboard/CleanerQuoteDb"
+import ApprovedBids from "./components/QuotesDashboard/ApprovedBids"
+import CleanerBids from "./components/QuotesDashboard/CleanerBids"
+import BidsDashboard from "./components/CleanersDashboard/BidsDashboard"
+import CleanerBookingDetails from "./components/CleanersDashboard/CleanerBookingDetails"
+import BookingsDashboard from "./components/BookingsProcess/BookingsDashboard"
+import AdminRegistration from "./components/AdminDashboard/AdminRegistration"
+import AdminWelcomePage from "./components/AdminDashboard/AdminWelcomePage"
 
 
 
@@ -55,86 +64,128 @@ import ClientCleanerMatch from "./components/ClientsActivities/ClientCleanerMatc
 function App() {
   return (
     <Router>
+
+<Routes>
+
+         {/* HomePageLayout Routes */}
+         <Route path="/" element={<HomePagesLayout/>}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About/>} />
+          <Route path="sign" element={<SignIn />} />
+          <Route path="register" element={<Register/>} />
+         
+        </Route>
+
+ {/*  Dashboards */}
+ <Route path="/" element={<AdminLayout/>}>
+ 
+ <Route path="providers-dashboard" element={<ProvidersDashboard />} />
+ <Route path="client-dashboard" element={<ClientServicesDashboard/>} />
+ <Route path="admindashboard" element={<AdminWelcomePage/>} />
+ 
+  
+</Route>
+
+    {/*  Users Profile Section */}
+    <Route path="/" element={<ProvidersLayout/>}>
+   
+    <Route path="profiless" element={<ProfileDashboard />} />  {/*  Users Dashboard */}
+
+    <Route path="/service-section" element={<ServiceSection />} />
+    <Route path="/service-location" element={<ServiceLocationYearsAvailability />} />
+    <Route path="/bio" element={<MyBio />} />
+    <Route path="/profile-verification" element={<ProfileVerification />} />
+    <Route path="/public-dashboard" element={<PublicDashboard />} />
+    <Route path="personal-details" element={<PersonalDetails />} />
+    <Route path="profile-pages" element={<ProfilePages />} />
+    <Route path="submit-bid" element={<SubmitBid />} />
+    <Route path="cleaner-quotedb" element={<CleanerQuoteDb />} />
+    <Route path="cleaner-bids" element={<CleanerBids />} />
+    <Route path="bids-dashboard" element={<BidsDashboard />} />
+    <Route path="cleaner-schedules" element={<CleanerSchedules />} />
+    <Route path="bookings" element={<CleanerBookingDetails />} />
+    
+  
+    
+    
+    
+    </Route>
+
+</Routes>
+
+
+
+
+
+
+
+
+
+
+      
       <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/cleaner-signup" element={<CleanerSignup />} />
-        <Route path="/client-signup" element={<ClientRegistration />} />
-        <Route path="/client-reg" element={<ClientsReg />} />
-        <Route path="/cleaner-reg" element={<CleanersReg />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/sign" element={<SignIn />} />
-        <Route path="/profile" element={<ProfileDashboard />} />
-        
-        
-        <Route path="/dashboard"element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>  }
-        />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/cleaner-signup" element={<CleanerSignup />} />
+      <Route path="/client-signup" element={<ClientRegistration />} />
+      <Route path="/client-reg" element={<ClientsReg />} />
+      <Route path="/cleaner-reg" element={<CleanersReg />} />
+    
+      <Route path="cleaner-bookings" element={<CleanerBookings />} />
+      <Route path="profiles" element={<ProfileDashboard />} />
+      <Route path="/dashboard"element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>  }
+      />
 
-        <Route>
-        <Route path="/personal-details" element={<PersonalDetails />} />
-        <Route path="/service-section" element={<ServiceSection />} />
-        <Route path="/service-location" element={<ServiceLocationYearsAvailability />} />
-        <Route path="/bio" element={<MyBio />} />
-        <Route path="/profile-verification" element={<ProfileVerification />} />
-        </Route>
-
-        <Route>
-
-        <Route path="/booking" element={<BookingForm />} />
-        
-        <Route path="/public-dashboard" element={<PublicDashboard />} />
-        <Route path="/cleaner-reviews" element={<CleanerReviews />} />
-        <Route path="/prompt-review" element={<ReviewPromptSection />} />
-        <Route path="/clientdashboard" element={<ClientDashboard />} />
-        
-        
-        
-        
-        
-        </Route>
-        
-        <Route>
-
-<Route path="/client-profile" element={<ClientProfile />} />
-
-<Route path="/booking-section" element={<BookingsSection  />} />
-<Route path="/cleaner-reviews" element={<CleanerReviews />} />
- <Route path="/client-payments" element={<PaymentsSection />} />
+    {/*  Users Profile Section */}
 
 
-
-</Route>
-        
-
-<Route>
-
-<Route path="/client-profile" element={<AdminCleanersDashboard />} />
-
-<Route path="/admincleanerdashboard" element={<AdminCleanersDashboard  />} />
-<Route path="/manage-reviews" element={<ManageReviews />} />
- <Route path="/client-payments" element={<AdminCleanersDashboard />} />
- <Route path="/cleaners-verify" element={<ManageCleanersVerification />} />
-  <Route path="/manage-payment" element={<ManagePayments />} />
-  <Route path="/providers-dashboard" element={<ProvidersDashboard />} />
-  
-</Route>
-        
+    {/* clients dashboard */}
+    <Route>
+    <Route path="/booking" element={<BookingForm />} />
+    
+    <Route path="/cleaner-reviews" element={<CleanerReviews />} />
+    <Route path="/prompt-review" element={<ReviewPromptSection />} />
+    <Route path="/clientdashboard" element={<ClientDashboard />} />   {/* clients dashboard */}
+    </Route>
+     {/* clients dashboard */}
 
 
-<Route>
+    <Route>
+    <Route path="/client-profile" element={<ClientProfile />} />
+    <Route path="/booking-section" element={<BookingsSection  />} />
+    <Route path="/booking-db" element={<BookingsDashboard/>} />
+    <Route path="/client-payments" element={<PaymentsSection />} />
+    <Route path="/request-quote" element={<RequestQuoteForm />} />
+    <Route path="/quotes-db" element={<Quotedashboard/>} />
+    <Route path="/approved-bids" element={<ApprovedBids/>} />
+    
+    
+    
+    </Route>
+    
 
-<Route path="/client-list" element={<ClientList />} />
+    <Route>
+    <Route path="/client-profile" element={<AdminCleanersDashboard />} />
+    <Route path="/admincleanerdashboard" element={<AdminCleanersDashboard  />} />
+    <Route path="/manage-reviews" element={<ManageReviews />} />
+    <Route path="/client-payments" element={<AdminCleanersDashboard />} />
+    <Route path="/cleaners-verify" element={<ManageCleanersVerification />} />
+    <Route path="/manage-payment" element={<ManagePayments />} />
+   
+    </Route>
 
-<Route path="/client-subscriptions" element={<ClientSubscriptions/>} />
-<Route path="/client-schedules" element={<ClientSchedules/>} />
-<Route path="/client-match" element={<ClientCleanerMatch/>} />
 
-  
-</Route>
-     
+    <Route>
+    <Route path="/client-list" element={<ClientList />} />
+    <Route path="/client-subscriptions" element={<ClientSubscriptions/>} />
+    <Route path="/client-schedules" element={<ClientSchedules/>} />
+    <Route path="/client-match" element={<ClientCleanerMatch/>} />
 
+    </Route>
+    
+    <Route path="adminregister" element={<AdminRegistration/>} />
 
 
 

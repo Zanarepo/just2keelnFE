@@ -18,7 +18,7 @@ const SignIn = () => {
     const tableMapping = {
       'service-provider': 'cleaners_main_profiles',
       client: 'clients_main_profiles',
-      admin: 'admin',
+      admin: 'admin_profiles',
     };
   
     const tableName = tableMapping[userType];
@@ -38,14 +38,19 @@ const SignIn = () => {
   
       // Store common email in localStorage
       localStorage.setItem('email', email);
-  
+    
       // Store specific user type email
       if (userType === 'service-provider') {
         localStorage.setItem('cleaner_email', email);
       } else if (userType === 'client') {
         localStorage.setItem('client_email', email);
+      } else if (userType === 'Admin') {
+        localStorage.setItem('admin_email', email);
       }
-  
+      
+      
+
+
       // Store user type for future reference
       localStorage.setItem('user_type', userType);
   
@@ -58,7 +63,7 @@ const SignIn = () => {
       } else if (userType === 'admin') {
         navigate('/admindashboard'); // Redirect to Admin Dashboard
       } else {
-        navigate('/profile'); // Default to service-provider profile
+        navigate('/profile-pages'); // Default to service-provider profile
       }
     } catch (err) {
       toast.error('An error occurred during login.');
@@ -66,6 +71,10 @@ const SignIn = () => {
     }
   };
   
+
+
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <ToastContainer />

@@ -75,7 +75,7 @@ const BookingsSection = () => {
 
   return (
     <div className="bg-white p-6 shadow rounded">
-      <h3 className="text-2xl font-semibold text-gray-700 mb-4">My Bookings</h3>
+      <h3 className="text-2xl font-semibold text-center mb-6 text-green-500">My Bookings</h3>
       {bookings.length === 0 ? (
         <p className="text-gray-500">No bookings found.</p>
       ) : (
@@ -84,7 +84,7 @@ const BookingsSection = () => {
             <tr className="bg-gray-100">
               <th className="border border-gray-300 px-4 py-2">Cleaner</th>
               <th className="border border-gray-300 px-4 py-2">Service Type</th>
-              <th className="border border-gray-300 px-4 py-2">Final Quote</th>
+          
               <th className="border border-gray-300 px-4 py-2">Status</th>
             </tr>
           </thead>
@@ -93,7 +93,7 @@ const BookingsSection = () => {
               <tr key={booking.booking_id}>
                 <td className="border border-gray-300 px-4 py-2">{booking.cleanerName}</td>
                 <td className="border border-gray-300 px-4 py-2">{booking.services}</td>
-                <td className="border border-gray-300 px-4 py-2">{booking.final_quote}</td>
+                
                 <td className="border border-gray-300 px-4 py-2">{booking.status}</td>
               </tr>
             ))}

@@ -77,7 +77,7 @@ const ReviewPromptSection = () => {
 
   return (
     <div className="bg-white p-6 shadow rounded">
-      <h3 className="text-2xl font-semibold text-gray-700 mb-4">Pending Reviews</h3>
+      <h3 className="text-2xl font-semibold text-center mb-6 text-green-600">Pending Reviews</h3>
       {pendingReviews.length === 0 ? (
         <p className="text-gray-500">No pending reviews. Thank you for your feedback!</p>
       ) : (

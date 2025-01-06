@@ -36,29 +36,29 @@ const ClientList = () => {
   if (error) {
     return <div className="text-center text-red-500">{error}</div>;
   }
-
   return (
-    <div className="min-h-screen bg-gray-100 py-6 px-4">
+    <div className="min-h-screen bg-white-100">
       <h2 className="text-2xl font-semibold text-green-500 mb-4 text-center">Clients List</h2>
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table className="min-w-full table-auto">
+      
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto border border-gray-200">
           <thead>
             <tr className="bg-gray-100">
-              <th className="py-2 px-4 text-left">Full Name</th>
-              <th className="py-2 px-4 text-left">Email</th>
-              <th className="py-2 px-4 text-left">Phone</th>
-              <th className="py-2 px-4 text-left">Address</th>
-              <th className="py-2 px-4 text-left">Created At</th>
+              <th className="py-2 text-left border-b border-gray-300">Full Name</th>
+              <th className="py-2 text-left border-b border-gray-300">Email</th>
+              <th className="py-2 text-left border-b border-gray-300">Phone</th>
+              <th className="py-2 text-left border-b border-gray-300">Address</th>
+              <th className="py-2 text-left border-b border-gray-300">Created At</th>
             </tr>
           </thead>
           <tbody>
             {clients.map((client) => (
               <tr key={client.id} className="border-b">
-                <td className="py-2 px-4">{client.full_name}</td>
-                <td className="py-2 px-4">{client.email}</td>
-                <td className="py-2 px-4">{client.phone_number}</td>
-                <td className="py-2 px-4">{client.address}</td>
-                <td className="py-2 px-4">{new Date(client.created_at).toLocaleDateString()}</td>
+                <td className="py-2">{client.full_name}</td>
+                <td className="py-2">{client.email}</td>
+                <td className="py-2">{client.phone_number}</td>
+                <td className="py-2">{client.address}</td>
+                <td className="py-2">{new Date(client.created_at).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>
@@ -66,6 +66,7 @@ const ClientList = () => {
       </div>
     </div>
   );
+  
 };
 
 export default ClientList;

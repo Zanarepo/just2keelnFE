@@ -149,170 +149,173 @@ const ClientSchedules = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6 px-4">
-      <h2 className="text-2xl font-semibold text-green-500 mb-4 text-center">Manage Your Schedule</h2>
-      
-      {/* Schedule Table */}
-      <div className="mt-8">
-        <h3 className="text-xl text-green-500 font-semibold mb-4">Your Schedules</h3>
-        {clientSchedule.length === 0 ? (
-          <div>No schedules found.</div>
-        ) : (
-          <table className="min-w-full bg-white border border-gray-300 rounded-lg">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 border-b">Service Type</th>
-                <th className="py-2 px-4 border-b">Service Date</th>
-                <th className="py-2 px-4 border-b">Service Time</th>
-              
-                <th className="py-2 px-4 border-b">Status</th>
-                <th className="py-2 px-4 border-b">View Profile</th>
-              </tr>
-            </thead>
-            <tbody>
-              {clientSchedule.map((schedule, index) => (
-                <tr key={index} className="hover:bg-gray-100">
-                  <td className="py-2 px-4 border-b">{schedule.service_type}</td>
-                  <td className="py-2 px-4 border-b">{schedule.service_date}</td>
-                  <td className="py-2 px-4 border-b">{schedule.service_time}</td>
-                  
-                  <td className="py-2 px-4 border-b">
-                    <span className={`px-3 py-1 rounded-full ${schedule.status === 'Pending' ? 'bg-yellow-300' : 'bg-green-300'}`}>
-                      {schedule.status}
-                    </span>
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    <button
-                      onClick={() => handleViewCleanerProfile(schedule.cleaner_id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+    <div className="min-h-screen bg-white-100">
+  {/* Main Heading */}
+  <h2 className="text-2xl sm:text-3xl font-semibold text-green-500 mb-6 sm:mb-8 text-center mt-6 sm:mt-12">
+   
+  </h2>
+  
+  {/* Schedule Table */}
+  <div className="mt-8">
+  <h3 className="text-xl sm:text-2xl text-center text-green-500 font-semibold mb-8 mt-6 sm:mt-12">
+  Your Schedules
+</h3>
 
-      {/* Add Schedule Button */}
-      <button
-        onClick={openModal}
-        className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 mt-4"
-      >
-        Add Schedule
-      </button>
-
-      {/* Add Schedule Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-semibold mb-4">Add New Schedule</h3>
-
-            <div className="mb-4">
-              <label htmlFor="service-type" className="block text-lg font-medium">Service Type</label>
-              <select
-                id="service-type"
-                value={serviceType}
-                onChange={(e) => setServiceType(e.target.value)}
-                className="mt-2 p-2 border rounded"
-              >
-                {serviceTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="service-date" className="block text-lg font-medium">Service Date</label>
-              <input
-                type="date"
-                id="service-date"
-                value={serviceDate}
-                onChange={(e) => setServiceDate(e.target.value)}
-                className="mt-2 p-2 border rounded"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="service-time" className="block text-lg font-medium">Service Time</label>
-              <input
-                type="time"
-                id="service-time"
-                value={serviceTime}
-                onChange={(e) => setServiceTime(e.target.value)}
-                className="mt-2 p-2 border rounded"
-              />
-            </div>
-
-            <button
-              onClick={handleAddSchedule}
-              className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600"
-            >
-              Add Schedule
-            </button>
-            <button
-              onClick={closeModal}
-              className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 ml-4"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-{/* Cleaner Profile Modal */}
-{isCleanerModalOpen && (
-  <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-    <div className="bg-white p-8 rounded-lg shadow-lg w-96 text-center">
-      
-      {/* Profile Picture at the top */}
-      {cleanerProfile?.profile_picture_url && (
-        <img 
-          src={cleanerProfile.profile_picture_url} 
-          alt="Profile" 
-          className="w-32 h-32 rounded-full mx-auto mb-4 border border-gray-300 shadow-sm"
-        />
-      )}
-
-      {/* Modal Header */}
-      <h3 className="text-2xl font-semibold mb-4"> Profile</h3>
-
-      {/* Profile Details */}
-      {cleanerProfile ? (
-        <div className="space-y-3 text-left">
-          <div>
-            <strong>Name:</strong> <span>{cleanerProfile.full_name}</span>
-          </div>
-          <div>
-            <strong>Phone:</strong> <span>{cleanerProfile.phone_number}</span>
-          </div>
-          <div>
-            <strong>Address:</strong> <span>{cleanerProfile.address}</span>
-          </div>
-          <div>
-            <strong>Address:</strong> <span>{cleanerProfile.states_of_residence}</span>
-          </div>
-        </div>
-      ) : (
-        <div className="text-gray-500 mt-4">Loading profile...</div>
-      )}
-
-      {/* Close Button */}
-      <button
-        onClick={closeCleanerModal}
-        className="mt-6 bg-red-500 text-white px-8 py-2 rounded-md hover:bg-red-600 focus:outline-none"
-      >
-        Close
-      </button>
-    </div>
+    {clientSchedule.length === 0 ? (
+      <div className="text-center">No schedules found.</div>
+    ) : (
+      <table className="min-w-full bg-white border border-gray-300 rounded-lg">
+        <thead>
+          <tr>
+            <th className="py-2 px-4 border-b text-center">Service Type</th>
+            <th className="py-2 px-4 border-b text-center">Service Date</th>
+            <th className="py-2 px-4 border-b text-center">Service Time</th>
+            <th className="py-2 px-4 border-b text-center">Status</th>
+            <th className="py-2 px-4 border-b text-center">View Profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          {clientSchedule.map((schedule, index) => (
+            <tr key={index} className="hover:bg-gray-100">
+              <td className="py-2 px-4 border-b text-center">{schedule.service_type}</td>
+              <td className="py-2 px-4 border-b text-center">{schedule.service_date}</td>
+              <td className="py-2 px-4 border-b text-center">{schedule.service_time}</td>
+              <td className="py-2 px-4 border-b text-center">
+                <span className={`px-3 py-1 rounded-full ${schedule.status === 'Pending' ? 'bg-yellow-300' : 'bg-green-300'}`}>
+                  {schedule.status}
+                </span>
+              </td>
+              <td className="py-2 px-4 border-b text-center">
+                <button
+                  onClick={() => handleViewCleanerProfile(schedule.cleaner_id)}
+                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
   </div>
-)}
 
+  {/* Add Schedule Button */}
+  <div className="text-center mt-4">
+    <button
+      onClick={openModal}
+      className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600"
+    >
+      Add Schedule
+    </button>
+  </div>
 
+  {/* Add Schedule Modal */}
+  {isModalOpen && (
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-96">
+        <h3 className="text-xl font-semibold mb-4">Add New Schedule</h3>
 
-      
+        {/* Service Type Selection */}
+        <div className="mb-4">
+          <label htmlFor="service-type" className="block text-lg font-medium">Service Type</label>
+          <select
+            id="service-type"
+            value={serviceType}
+            onChange={(e) => setServiceType(e.target.value)}
+            className="mt-2 p-2 border rounded w-full"
+          >
+            {serviceTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        {/* Service Date */}
+        <div className="mb-4">
+          <label htmlFor="service-date" className="block text-lg font-medium">Service Date</label>
+          <input
+            type="date"
+            id="service-date"
+            value={serviceDate}
+            onChange={(e) => setServiceDate(e.target.value)}
+            className="mt-2 p-2 border rounded w-full"
+          />
+        </div>
+
+        {/* Service Time */}
+        <div className="mb-4">
+          <label htmlFor="service-time" className="block text-lg font-medium">Service Time</label>
+          <input
+            type="time"
+            id="service-time"
+            value={serviceTime}
+            onChange={(e) => setServiceTime(e.target.value)}
+            className="mt-2 p-2 border rounded w-full"
+          />
+        </div>
+
+        {/* Add Schedule Button */}
+        <div className="flex justify-between">
+          <button
+            onClick={handleAddSchedule}
+            className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600"
+          >
+            Add Schedule
+          </button>
+          <button
+            onClick={closeModal}
+            className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600"
+          >
+            Close
+          </button>
+        </div>
+      </div>
     </div>
+  )}
+
+  {/* Cleaner Profile Modal */}
+  {isCleanerModalOpen && (
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96 text-center">
+        {/* Profile Picture */}
+        {cleanerProfile?.profile_picture_url && (
+          <img
+            src={cleanerProfile.profile_picture_url}
+            alt="Profile"
+            className="w-32 h-32 rounded-full mx-auto mb-4 border border-gray-300 shadow-sm"
+          />
+        )}
+
+        {/* Modal Header */}
+        <h3 className="text-2xl font-semibold mb-4">Profile</h3>
+
+        {/* Profile Details */}
+        {cleanerProfile ? (
+          <div className="space-y-3 text-left">
+            <div><strong>Name:</strong> <span>{cleanerProfile.full_name}</span></div>
+            <div><strong>Phone:</strong> <span>{cleanerProfile.phone_number}</span></div>
+            <div><strong>Address:</strong> <span>{cleanerProfile.address}</span></div>
+            <div><strong>State:</strong> <span>{cleanerProfile.states_of_residence}</span></div>
+          </div>
+        ) : (
+          <div className="text-gray-500 mt-4">Loading profile...</div>
+        )}
+
+        {/* Close Button */}
+        <button
+          onClick={closeCleanerModal}
+          className="mt-6 bg-red-500 text-white px-8 py-2 rounded-md hover:bg-red-600"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  )}
+</div>
+
   );
 };
 

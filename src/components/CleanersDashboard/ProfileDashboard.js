@@ -71,18 +71,23 @@ const ProfileDashboard = () => {
   };
 
   if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
+
 
   return (
     <div className="min-h-screen w-full">
-      <header className="fixed top-0 left-0 w-full bg-white shadow-md z-20">
-        <div className="py-4 text-center text-2xl font-semibold text-green-600">
+      {/* Header */}
+      <header className="fixed top-0 left-0 w-full md:ml-48 bg-white shadow-md z-20">
+        <div className="py-2 text-center text-lg font-semibold text-green-600">
           Profile Dashboard
         </div>
-        <nav className="border-t border-b">
-          <div className="flex justify-around py-2">
+  
+        {/* Navbar */}
+        <nav className="border-t border-b overflow-x-auto">
+          <div className="flex flex-nowrap justify-start px-4 py-2 gap-3">
             <button
               onClick={() => setActiveTab('publicDashboard')}
-              className={`py-2 px-8 text-sm font-semibold ${
+              className={`py-1 px-3 text-sm font-semibold ${
                 activeTab === 'publicDashboard' ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'
               }`}
             >
@@ -90,15 +95,15 @@ const ProfileDashboard = () => {
             </button>
             <button
               onClick={() => setActiveTab('personalDetails')}
-              className={`py-2 px-8 text-sm font-semibold ${
+              className={`py-1 px-3 text-sm font-semibold ${
                 activeTab === 'personalDetails' ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'
               }`}
             >
-              Personal Details  {/*  */} <ProfileVerificationPopup/>
+              Personal Details <ProfileVerificationPopup />
             </button>
             <button
               onClick={() => setActiveTab('serviceSection')}
-              className={`py-2 px-4 text-sm font-semibold ${
+              className={`py-1 px-3 text-sm font-semibold ${
                 activeTab === 'serviceSection' ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'
               }`}
             >
@@ -106,7 +111,7 @@ const ProfileDashboard = () => {
             </button>
             <button
               onClick={() => setActiveTab('serviceLocation')}
-              className={`py-2 px-4 text-sm font-semibold ${
+              className={`py-1 px-3 text-sm font-semibold ${
                 activeTab === 'serviceLocation' ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'
               }`}
             >
@@ -114,7 +119,7 @@ const ProfileDashboard = () => {
             </button>
             <button
               onClick={() => setActiveTab('myBio')}
-              className={`py-2 px-4 text-sm font-semibold ${
+              className={`py-1 px-3 text-sm font-semibold ${
                 activeTab === 'myBio' ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'
               }`}
             >
@@ -123,10 +128,19 @@ const ProfileDashboard = () => {
           </div>
         </nav>
       </header>
-
-      <div className="pt-28">{renderContent()}</div>
+  
+      {/* Main Content */}
+      <div className="pt-20 md:ml-48 px-4">{renderContent()}</div>
     </div>
   );
+  
+
+
+
+
+
+
+  
 };
 
 export default ProfileDashboard;
