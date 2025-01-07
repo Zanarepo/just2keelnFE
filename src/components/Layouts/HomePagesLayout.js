@@ -7,6 +7,8 @@ import About from "./About";
 import Register from "../CustomeAuth/Register";
 import SignIn from "../CustomeAuth/SignIn";
 
+
+
 const HomePageLayout = () => {
   return (
     <div className="min-h-screen flex flex-col">
@@ -20,6 +22,10 @@ const HomePageLayout = () => {
           <Route path="/about" element={<About />} />
           <Route path="/sign" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
+          
+          
+    
+          
         </Routes>
       </div>
 

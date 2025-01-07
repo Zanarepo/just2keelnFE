@@ -10,6 +10,7 @@ import CleanerBids from "../QuotesDashboard/CleanerBids"
 import BidsDashboard from "../CleanersDashboard/BidsDashboard"
 import CleanerSchedules from "../CleanersDashboard/CleanerSchedules"
 import CleanerBookingDetails from "../CleanersDashboard/CleanerBookingDetails"
+import BookingForm from "../BookingsProcess/BookingForm"
 
 
 import { HomeIcon, UserIcon, CogIcon } from "@heroicons/react/24/outline";
@@ -100,6 +101,7 @@ const ProvidersLayout = () => {
           <Route path="/bids-dashboard" element={<BidsDashboard />} /> 
           <Route path="/cleaner-schedules" element={< CleanerSchedules />} /> 
           <Route path="/bookings" element={< CleanerBookingDetails />} /> 
+           <Route path="booking" element={<BookingForm />} />
           
         </Routes>
       </div>

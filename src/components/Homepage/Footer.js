@@ -7,10 +7,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* About Section */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">About Us</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">About Just2Kleen</h3>
           <p className="text-sm text-gray-700 leading-relaxed">
-            At Datafy, we empower individuals and organizations with innovative
-            solutions, ensuring excellence and collaboration to drive success.
+            Just2Kleen connects clients and service providers for efficient, affordable, and customized cleaning
+            solutions, ensuring high-quality service and convenience for both.
           </p>
         </div>
 
@@ -18,18 +18,9 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Us</h3>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li className="flex items-center">
-           
-              123 Tech Street, Innovation City, 56789
-            </li>
-            <li className="flex items-center">
-            
-              +1 (123) 456-7890
-            </li>
-            <li className="flex items-center">
-              
-              contact@datafy.com
-            </li>
+            <li className="flex items-center">123 Clean Street, Service City, 98765</li>
+            <li className="flex items-center">+1 (555) 123-4567</li>
+            <li className="flex items-center">contact@just2kleen.com</li>
           </ul>
         </div>
 
@@ -42,28 +33,28 @@ const Footer = () => {
               className="p-2 rounded-full bg-gray-200 hover:bg-blue-100"
               aria-label="Facebook"
             >
-            
+              <i className="fab fa-facebook-f text-xl"></i>
             </a>
             <a
               href="https://twitter.com"
               className="p-2 rounded-full bg-gray-200 hover:bg-blue-100"
               aria-label="Twitter"
             >
-    
+              <i className="fab fa-twitter text-xl"></i>
             </a>
             <a
               href="https://instagram.com"
               className="p-2 rounded-full bg-gray-200 hover:bg-pink-100"
               aria-label="Instagram"
             >
-              
+              <i className="fab fa-instagram text-xl"></i>
             </a>
             <a
               href="https://linkedin.com"
               className="p-2 rounded-full bg-gray-200 hover:bg-blue-100"
               aria-label="LinkedIn"
             >
-        
+              <i className="fab fa-linkedin-in text-xl"></i>
             </a>
           </div>
         </div>
@@ -72,15 +63,15 @@ const Footer = () => {
       {/* Links and Copyright */}
       <div className="mt-8 border-t pt-4 text-center">
         <div className="space-x-4 mb-2">
-          <button className="text-sm text-gray-600 hover:text-blue-600">
+          <a href="/privacy-policy" className="text-sm text-gray-600 hover:text-blue-600">
             Privacy Policy
-          </button>
-          <button className="text-sm text-gray-600 hover:text-blue-600">
+          </a>
+          <a href="/terms" className="text-sm text-gray-600 hover:text-blue-600">
             Terms of Service
-          </button>
+          </a>
         </div>
         <p className="text-xs text-gray-500">
-          © 2024 Datafy. All rights reserved.
+          © 2025 Just2Kleen. All rights reserved.
         </p>
       </div>
     </footer>

@@ -5,12 +5,12 @@ import PaymentsSection from './PaymentsSection';
 import ReviewPromptSection from './ReviewPromptSection';
 import ClientSchedules from '../ClientsActivities/ClientSchedules';
 import ResidenceUpdatePopup from "./ResidenceUpdatePopup"
-import { FaSignOutAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+//import { FaSignOutAlt } from 'react-icons/fa';
+//import { useNavigate } from 'react-router-dom';
 
 const ClientDashboard = () => {
   const [activeTab, setActiveTab] = useState('profile');
-  const navigate = useNavigate(); // Initialize useNavigate here
+  //const navigate = useNavigate(); // Initialize useNavigate here
 
   const renderContent = () => {
     switch (activeTab) {
@@ -82,7 +82,7 @@ const ClientDashboard = () => {
       {/* Content area */}
       <main className="bg-white shadow rounded mt-20 sm:mt-24 pt-6 pb-4">{renderContent()}</main>
 
-      {/* Logout Button */}
+      {/* Logout Button 
       <div className="fixed bottom-4 left-0 w-full flex justify-center">
         <button
           onClick={() => {
@@ -91,9 +91,9 @@ const ClientDashboard = () => {
           }}
           className="flex items-center px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
         >
-          <FaSignOutAlt className="mr-2" /> Logout
+          <FaSignOutAlt className="mr-2" /> 
         </button>
-      </div>
+      </div>*/}
     </div>
   );
 };

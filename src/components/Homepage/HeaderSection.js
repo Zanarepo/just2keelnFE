@@ -1,26 +1,29 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Importing the useNavigate hook for routing
 
 const HeaderSection = () => {
-  const navigate = useNavigate(); // Hook to navigate to different routes
-
-  const handleLearnMore = () => {
-    navigate("/about"); // Navigate to the /about page
-  };
-
   return (
-    <header className="header-section bg-blue-500 text-white p-8 text-center mt-16">
-      <h1 className="text-4xl font-bold">Welcome to Datafy</h1>
-      <p className="mt-4 text-lg">
-        Empowering government organizations to manage workforce efficiently.
-      </p>
-      <div className="mt-6">
-        <button
-          onClick={handleLearnMore} // Added onClick handler to trigger navigation
-          className="px-6 py-2 bg-white text-blue-500 font-bold rounded"
-        >
-          Learn More
-        </button>
+    <header className="bg-gradient-to-r from-green-600 to-green-700 text-white p-8">
+      <div className="max-w-7xl mx-auto text-center">
+        {/* Heading */}
+        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+          Just2Kleen: We&apos;re the Best in Cleaning Services
+        </h1>
+
+        {/* Subheading */}
+        <p className="text-lg md:text-xl mb-6">
+          Discover exceptional cleaning services that ensure your home or office sparkles with freshness. 
+          From one-time deep cleaning to regular maintenance, we offer tailored solutions to meet all your needs.
+        </p>
+
+        {/* Call to Action */}
+        <div>
+          <a
+            href="#services"
+            className="bg-green-800 hover:bg-green-900 text-white py-3 px-6 rounded-md text-lg font-semibold transition duration-300"
+          >
+            Explore Our Services
+          </a>
+        </div>
       </div>
     </header>
   );
