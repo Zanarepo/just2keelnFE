@@ -31,17 +31,19 @@ const CTASection = () => {
         <p className="text-lg sm:text-xl mb-8">
           Join thousands of satisfied clients and professionals today. Let’s make cleaning simple and hassle-free.
         </p>
-        <div className="cta-buttons flex justify-center gap-6">
-          <button 
-            onClick={() => handleFormSelection('booking')} 
-            className="cta-btn client-btn bg-white text-green-700 px-8 py-4 rounded-lg shadow-lg hover:bg-green-100 transition ease-in-out duration-200">
-             Request a Quote
-          </button>
-          <button 
-            onClick={() => handleFormSelection('quote')} 
-            className="cta-btn cleaner-btn bg-gray-800 text-white px-8 py-4 rounded-lg shadow-lg hover:bg-gray-700 transition ease-in-out duration-200">
-            Find Your Cleaner
-          </button>
+        <div className="cta-buttons flex flex-col sm:flex-row justify-center gap-6 sm:gap-8 items-center">
+  <button 
+    onClick={() => handleFormSelection('booking')} 
+    className="cta-btn client-btn bg-white text-green-700 px-8 py-4 rounded-lg shadow-lg hover:bg-green-100 transition ease-in-out duration-200 w-full sm:w-auto">
+    Request a Quote
+  </button>
+  <button 
+    onClick={() => handleFormSelection('quote')} 
+    className="cta-btn cleaner-btn bg-gray-800 text-white px-8 py-4 rounded-lg shadow-lg hover:bg-gray-700 transition ease-in-out duration-200 w-full sm:w-auto">
+    Find Your Cleaner
+  </button>
+
+
         </div>
       </div>
 
