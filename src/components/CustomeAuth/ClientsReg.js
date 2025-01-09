@@ -81,7 +81,7 @@ const ClientRegistration = () => {
 
   return (
     <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Client Registration</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-green-600 text-center">Client Registration</h2>
       
       {/* Full Name */}
       <input
@@ -148,7 +148,7 @@ const ClientRegistration = () => {
 
       <button
         onClick={handleRegister}
-        className="w-full bg-blue-500 text-white py-3 rounded-md font-semibold hover:bg-blue-600"
+        className="w-full bg-green-600 text-white py-3 rounded-md  font-semibold hover:bg-green-700"
       >
         Register as Client
       </button>

@@ -9,17 +9,43 @@ import PricingSection from './PricingSection';
 import TestimonialsSection from './TestimonialsSection';
 import FAQSection from './FAQSection';
 import SearchAndBookComponent from "../QuotesDashboard/SearchAndBookComponent"; // Import the search component
+import CleaningPricesForm from "../Homepage/CleaningPricesForm"; // Import the CleaningPricesForm component
+import CleaningServicesSlideshow from './CleaningServicesSlideshow'; // Import the CleaningServicesSlideshow component
+import CleaningOfferingsSlideshow from './CleaningOfferingsSlideshow'; // Import the CleaningOfferingsSlideshow component
 
 const HomePage = () => {
   return (
     <div className="home-page">
       <HeroSection />
+      
+      {/* Cleaning Services Slideshow added here */}
+      <section className="py-12 bg-white-100">
+        <div className="container mx-auto">
+          <CleaningServicesSlideshow /> {/* Cleaning Services Slideshow */}
+        </div>
+      </section>
+
       <HowItWorksSection />
 
-      {/* Search component added here */}
-      <section className="py-16 bg-white-100">
+      {/* Cleaning Offerings Slideshow added here */}
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto">
+      
+          <CleaningOfferingsSlideshow /> {/* Cleaning Offerings Slideshow */}
+        </div>
+      </section>
+
+      {/* Search and Book component added here */}
+      <section className="py-0 bg-white-100">
         <div className="">
           <SearchAndBookComponent /> {/* Search and Book component */}
+        </div>
+      </section>
+
+      {/* Cleaning Prices Form added here */}
+      <section className="py-10 bg-white-500">
+        <div className="container mx-auto">
+          <CleaningPricesForm /> {/* Cleaning Prices Form */}
         </div>
       </section>
 

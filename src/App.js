@@ -62,15 +62,21 @@ import AnonRequestQuote from "./components/QuotesDashboard/AnonRequestQuote"
 import AnonRequestQuoteForm from "./components/QuotesDashboard/AnonRequestQuoteForm"
 import LandingPageForm from "./components/QuotesDashboard/LandingPageForm"
 import SearchAndBookComponent from "./components/QuotesDashboard/SearchAndBookComponent"
-
-
-
-
-
-
-
-
-
+import GuestBookingsComponent from "./components/BookingsProcess/GuestBookingsComponent"
+import GuestQuoteRequests from "./components/BookingsProcess/GuestQuoteRequests"
+import ManageBids from "./components/BookingsProcess/ManageBids"
+import BidDetails   from "./components/BookingsProcess/BidDetails"
+import GuestandClientQuoteDashboard from "./components/BookingsProcess/GuestandClientQuoteDashboard"
+import AdminQuoteRequests from "./components/AdminDashboard/AdminQuoteRequests"
+import AdminGuestQuotesRequest from "./components/AdminDashboard/AdminGuestQuotesRequest"
+import  AdminBids from "./components/AdminDashboard/AdminBids"
+import AdminGuestBooking from "./components/AdminDashboard/AdminGuestBooking"
+import AdminCleanerSchedules from "./components/AdminDashboard/AdminCleanerSchedules"
+import GeneralDashboards from "./components/AdminDashboard/GeneralDashboards"
+import CleaningPricesForm from "./components/Homepage/CleaningPricesForm"
+import CleaningServicesSlideshow from "./components/Homepage/CleaningServicesSlideshow"
+import Post from "./components/QuotesDashboard/Post"
+import CleaningOfferingsSlideshow from "./components/Homepage/CleaningOfferingsSlideshow"
 
 
 
@@ -88,7 +94,7 @@ function App() {
           <Route path="about" element={<About/>} />
           <Route path="sign" element={<SignIn />} />
           <Route path="register" element={<Register/>} />
-   
+
           
          
        
@@ -99,12 +105,28 @@ function App() {
  {/*  Dashboards */}
  <Route path="/" element={<AdminLayout/>}>
  
- <Route path="providers-dashboard" element={<ProvidersDashboard />} />
- <Route path="client-dashboard" element={<ClientServicesDashboard/>} />
- <Route path="admindashboard" element={<AdminWelcomePage/>} />
- 
-  
+      <Route path="providers-dashboard" element={<ProvidersDashboard />} />
+      <Route path="client-dashboard" element={<ClientServicesDashboard/>} />
+      <Route path="admindashboard" element={<AdminWelcomePage/>} />
+      <Route path="manage-bids" element={<ManageBids/>} />
+      <Route path="admin-quoterequest" element={<AdminQuoteRequests/>} />
+      <Route path="admin-guestquotesreq" element={<AdminGuestQuotesRequest/>} />
+      <Route path="admin-bids" element={<AdminBids/>} />
+      <Route path="admin-guestbooking" element={<AdminGuestBooking/>} />
+      <Route path="admin-cleanersschedule" element={<AdminCleanerSchedules/>} />
+      <Route path="general-dashboards" element={<GeneralDashboards/>} />
+      
+
 </Route>
+
+
+
+
+
+
+
+
+
 
     {/*  Users Profile Section */}
     <Route path="/" element={<ProvidersLayout/>}>
@@ -125,8 +147,11 @@ function App() {
     <Route path="cleaner-schedules" element={<CleanerSchedules />} />
     <Route path="bookings" element={<CleanerBookingDetails />} />
     <Route path="booking" element={<BookingForm />} />
-  
-    
+    <Route path="guest-booking" element={<GuestBookingsComponent />} />
+    <Route path="guest-quotes" element={<GuestQuoteRequests />} />
+    <Route path="bids-details" element={<BidDetails />} />
+    <Route path="quote-bookingdashboard" element={<GuestandClientQuoteDashboard />} />
+    <Route path="quote-bookingdashboard" element={<GuestandClientQuoteDashboard />} />
     
     
     </Route>
@@ -157,7 +182,7 @@ function App() {
       <Route path="/anonrequest-quote" element={<AnonRequestQuoteForm />} />
       <Route path="/landingpage-form" element={<LandingPageForm />} />
       <Route path="/search" element={<SearchAndBookComponent />} />
-      
+       <Route path="/post" element={<Post />} />
       <Route path="cleaner-bookings" element={<CleanerBookings />} />
       <Route path="profiles" element={<ProfileDashboard />} />
       <Route path="/dashboard"element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>  }
@@ -169,7 +194,7 @@ function App() {
     {/* clients dashboard */}
     <Route>
   
-    
+     <Route path="/cleaning-prices" element={<CleaningPricesForm />} />
     <Route path="/cleaner-reviews" element={<CleanerReviews />} />
     <Route path="/prompt-review" element={<ReviewPromptSection />} />
     <Route path="/clientdashboard" element={<ClientDashboard />} />   {/* clients dashboard */}
@@ -188,6 +213,7 @@ function App() {
     <Route path="/approved-bids" element={<ApprovedBids/>} />
     
     <Route path="quote" element={<RequestQuote/>} />
+    
    
     </Route>
     
@@ -199,7 +225,8 @@ function App() {
     <Route path="/client-payments" element={<AdminCleanersDashboard />} />
     <Route path="/cleaners-verify" element={<ManageCleanersVerification />} />
     <Route path="/manage-payment" element={<ManagePayments />} />
-   
+    <Route path="/services-slides" element={<CleaningServicesSlideshow />} />
+    <Route path="/offering-slides" element={<CleaningOfferingsSlideshow />} />
     </Route>
 
 
@@ -214,7 +241,7 @@ function App() {
     <Route path="adminregister" element={<AdminRegistration/>} />
 
 
-
+    <Route path="/test" element={<test/>} />
 
 
 

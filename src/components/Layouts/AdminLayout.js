@@ -1,10 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, Routes, Route } from "react-router-dom";
+import { HomeIcon, UserIcon, CogIcon } from "@heroicons/react/24/outline";
+
 import ProvidersDashboard from "../AdminDashboard/ProvidersDashboard";
 import ClientServicesDashboard from "../ClientsActivities/ClientServicesDashboard";
 import AdminWelcomePage from "../AdminDashboard/AdminWelcomePage";
+import ManageBids  from "../BookingsProcess/ManageBids";
+import AdminQuoteRequests  from "../AdminDashboard/AdminQuoteRequests";
+import AdminGuestQuotesRequest from "../AdminDashboard/AdminGuestQuotesRequest"
+import  AdminBids from "../AdminDashboard/AdminBids"
+import  AdminGuestBooking from "../AdminDashboard/AdminGuestBooking"
+import AdminCleanerSchedules from "../AdminDashboard/AdminCleanerSchedules"
+import GeneralDashboards from "../AdminDashboard/GeneralDashboards"
 
-import { HomeIcon, UserIcon, CogIcon } from "@heroicons/react/24/outline";
+
+
+
+
 import { FaSignOutAlt } from 'react-icons/fa';  // Updated for logout icon
 
 const AdminLayout = () => {
@@ -16,7 +28,7 @@ const AdminLayout = () => {
     { name: "Squads DB", icon: <UserIcon className="h-6 w-6" />, route: "/providers-dashboard" },
     { name: "Client Dashboard", icon: <UserIcon className="h-6 w-6" />, route: "/client-dashboard" },
     { name: "Admin", icon: <UserIcon className="h-6 w-6" />, route: "/admin" },
-    { name: "Settings", icon: <CogIcon className="h-6 w-6" />, route: "/settings" },
+    { name: "Activities DB", icon: <CogIcon className="h-6 w-6" />, route: "/general-dashboards" },
     { name: "Logout", icon: <FaSignOutAlt className="h-6 w-6" />, route: "/logout" },  // Updated logout icon
   ];
 
@@ -87,10 +99,30 @@ const AdminLayout = () => {
   
     {/* Main Content */}
     <div className="flex-1 md:ml-48 p-6 bg-gray-100 min-h-screen overflow-x-hidden">
+      
+      
+      
       <Routes>
         <Route path="/providers-dashboard" element={<ProvidersDashboard />} />
         <Route path="/client-dashboard" element={<ClientServicesDashboard />} />
         <Route path="/admindashboard" element={<AdminWelcomePage />} />
+        <Route path="/manage-bids" element={<ManageBids />} />
+       <Route path="/admin-quoterequest" element={< AdminQuoteRequests />} />
+        <Route path="/admin-guestquotesreq" element={< AdminGuestQuotesRequest />} />
+        <Route path="/admin-bids" element={< AdminBids />} />
+         <Route path="/general-dashboards" element={<GeneralDashboards/>} />
+        <Route path="/admin-guestbooking" element={<AdminGuestBooking/>} />
+        <Route path="admin-cleanersschedule" element={<AdminCleanerSchedules/>} />
+
+
+
+
+
+
+
+
+
+
         {/* Add more routes as needed */}
       </Routes>
     </div>

@@ -109,6 +109,8 @@ const CleanerBids = () => {
     <div className="p-5">
       <h2 className="text-2xl font-bold text-center text-green-600 mb-4">Cleaner Bids</h2>
 
+      <h1 className="text-base text-left text-gray-600 mb-4">These section deals with bids from a registered client, you get to see all the bids you have won and ready for execution</h1>
+
       {cleanerBids.length > 0 ? (
         <table className="w-full border-collapse border border-gray-300">
           <thead className="bg-green-100">

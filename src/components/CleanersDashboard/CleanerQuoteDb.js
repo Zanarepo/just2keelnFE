@@ -119,7 +119,10 @@ const CleanerDashboard = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold text-center text-green-600 mb-4">Available Quote Requests</h2>
-
+      <p className="text-base text-left text-gray-600 mb-4">
+  This is where you manage all your Quotes request bidding from a registered client. 
+   A client request for cleaners to submit their quote after seeing the details of the quote and the budget for the services, you can decide to bid for it or not. 
+</p>
       <div>
         {quoteRequests.map((quoteRequest) => (
           <div key={quoteRequest.id} className="mb-4 p-4 border border-gray-300 rounded">

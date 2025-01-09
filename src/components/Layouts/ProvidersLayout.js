@@ -11,6 +11,10 @@ import BidsDashboard from "../CleanersDashboard/BidsDashboard"
 import CleanerSchedules from "../CleanersDashboard/CleanerSchedules"
 import CleanerBookingDetails from "../CleanersDashboard/CleanerBookingDetails"
 import BookingForm from "../BookingsProcess/BookingForm"
+import GuestBookingsComponent from "../BookingsProcess/GuestBookingsComponent"
+import GuestQuoteRequests from "../BookingsProcess/GuestQuoteRequests"
+import BidDetails   from "../BookingsProcess/BidDetails"
+import GuestandClientQuoteDashboard   from "../BookingsProcess/GuestandClientQuoteDashboard"
 
 
 import { HomeIcon, UserIcon, CogIcon } from "@heroicons/react/24/outline";
@@ -27,7 +31,7 @@ const ProvidersLayout = () => {
     { name: "Settings", icon: <CogIcon className="h-6 w-6" />, route: "/settings" },
     { name: "Logout", icon: <FaSignOutAlt className="h-6 w-6" />, route: "/logout" },
    
-  
+    
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen); // Toggle sidebar visibility
@@ -101,8 +105,12 @@ const ProvidersLayout = () => {
           <Route path="/bids-dashboard" element={<BidsDashboard />} /> 
           <Route path="/cleaner-schedules" element={< CleanerSchedules />} /> 
           <Route path="/bookings" element={< CleanerBookingDetails />} /> 
-           <Route path="booking" element={<BookingForm />} />
-          
+          <Route path="booking" element={<BookingForm />} />
+          <Route path="guest-booking" element={<GuestBookingsComponent />} />
+          <Route path="guest-quotes" element={<GuestQuoteRequests />} />
+          <Route path="bids-details" element={<BidDetails />} />
+          <Route path="/quote-bookingdashboard" element={<GuestandClientQuoteDashboard />} />
+
         </Routes>
       </div>
     </div>

@@ -27,24 +27,42 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="faq-section py-12 bg-gray-50">
-      <div className="container mx-auto text-center">
-        <h2 className="faq-heading text-3xl md:text-4xl font-bold text-gray-800 mb-10">
+    <section className="faq-section py-16 bg-white-100">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 text-center">
+        <h2 className="faq-heading text-3xl font-bold text-center text-green-700 mb-8">
           Frequently Asked Questions
         </h2>
         <div className="faq-list space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="faq-item border-b border-gray-200 pb-6">
+            <div 
+              key={index} 
+              className={`faq-item bg-white shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg p-6 ${
+                activeIndex === index ? 'shadow-lg' : ''
+              }`}
+            >
               <button
-                className="faq-question text-lg text-left font-medium text-gray-700 w-full flex items-center justify-between"
+                className="faq-question text-lg font-semibold text-gray-700 w-full flex items-center justify-between focus:outline-none"
                 onClick={() => toggleAnswer(index)}
+                aria-expanded={activeIndex === index}
               >
                 <span>{faq.question}</span>
-                <span className={`arrow text-2xl ${activeIndex === index ? 'rotate-180' : ''}`}>↓</span>
+                <span 
+                  className={`arrow text-2xl transform transition-transform duration-300 ${
+                    activeIndex === index ? 'rotate-180' : ''
+                  }`}
+                >
+                  ↓
+                </span>
               </button>
-              {activeIndex === index && (
-                <p className="faq-answer text-gray-600 mt-2 text-base">{faq.answer}</p>
-              )}
+              <div
+                className={`faq-answer overflow-hidden transition-all duration-300 mt-3 ${
+                  activeIndex === index ? 'max-h-40' : 'max-h-0'
+                }`}
+              >
+                <p className="text-gray-600 text-base leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
             </div>
           ))}
         </div>
