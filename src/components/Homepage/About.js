@@ -74,7 +74,7 @@ const AboutUsSection = () => {
         <p className="team-member-role text-md text-gray-600">Head of Strategy</p>
       </div>
       <div className="team-member bg-white p-6 rounded-lg shadow-md text-center">
-        <img src="images" alt="oluchi" className="team-member-photo rounded-full mb-4 w-24 h-24 mx-auto" />
+        <img src="images/oluchi.jpg" alt="oluchi" className="team-member-photo rounded-full mb-4 w-24 h-24 mx-auto" />
         <h4 className="team-member-name text-xl font-bold mb-2">Oluchi Ezugo</h4>
         <p className="team-member-role text-md text-gray-600">Head of Brands</p>
       </div>

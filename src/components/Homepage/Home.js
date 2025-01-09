@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify'; // Import ToastContainer
 import HeroSection from './HeroSection';
 import HowItWorksSection from './HowItWorksSection';
 import CTASection from './CTASection';
-import AboutUsSection from './AboutUsSection';
+//import AboutUsSection from './AboutUsSection';
 import FeaturesKleen from './Features';
 import PricingSection from './PricingSection';
 import TestimonialsSection from './TestimonialsSection';
@@ -50,7 +50,7 @@ const HomePage = () => {
       </section>
 
       <CTASection />
-      <AboutUsSection />
+   
       <FeaturesKleen />
       <PricingSection />
       <TestimonialsSection />
