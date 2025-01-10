@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { supabase } from '../../supabaseClient'; // Assuming supabaseClient is set up
+//import InactivityHandler from "../Homepage/InactivityHandler"
 
 const PreSubscribeComponent = () => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -17,11 +18,6 @@ const PreSubscribeComponent = () => {
   const [selectedNumRooms, setSelectedNumRooms] = useState('');
   const [selectedCleaningFrequencyId, setSelectedCleaningFrequencyId] = useState('');
 
-  const [lastActivity, setLastActivity] = useState(Date.now());
-
-  // Define the inactivity timeout period (e.g., 5 seconds)
-  const INACTIVITY_TIMEOUT = 50000;
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,37 +25,22 @@ const PreSubscribeComponent = () => {
           .from('cleaning_subscriptions')
           .select('*');
         if (subscriptionError) throw subscriptionError;
-
+  
         const { data: frequencyData, error: frequencyError } = await supabase
           .from('cleaning_frequencies')
           .select('*');
         if (frequencyError) throw frequencyError;
-
+  
         setSubscriptions(subscriptionData);
         setFrequencies(frequencyData);
       } catch (error) {
         toast.error('Error fetching data: ' + error.message);
       }
     };
-
+  
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const inactivityTimer = setTimeout(() => {
-      // Check if the user has been inactive for the timeout period
-      if (Date.now() - lastActivity > INACTIVITY_TIMEOUT) {
-        // Clear search results and reset fields
-        setSelectedBuildingType('');
-        setSelectedNumRooms('');
-        setSelectedCleaningFrequencyId('');
-        setSelectedSubscription(null);
-      }
-    }, INACTIVITY_TIMEOUT);
-
-    return () => clearTimeout(inactivityTimer); // Cleanup timeout on component unmount or dependency change
-  }, [lastActivity]);
-
+  }, []); // Empty dependency array ensures it only runs once
+  
   const uniqueBuildingTypes = [...new Set(subscriptions.map((sub) => sub.building_type))];
 
   const filteredSubscriptions = subscriptions.filter(
@@ -67,8 +48,6 @@ const PreSubscribeComponent = () => {
   );
 
   const handleSearch = () => {
-    setLastActivity(Date.now()); // Reset the inactivity timer
-
     const matchingSubscription = filteredSubscriptions.find(
       (subscription) =>
         subscription.num_rooms === parseInt(selectedNumRooms) &&
@@ -84,31 +63,25 @@ const PreSubscribeComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!formData.name || !formData.email || !formData.phone || !formData.cleanerPreference) {
       toast.error('Please fill in all fields');
       return;
     }
-  
-    // Check if selectedSubscription exists before accessing its properties
-    if (!selectedSubscription) {
-      toast.error('Please select a subscription before submitting');
-      return;
-    }
-  
+
     try {
-      const { error } = await supabase.from('subscription_clients').insert([
+      const {  error } = await supabase.from('subscription_clients').insert([
         {
           client_full_name: formData.name,
           client_email: formData.email,
           client_phone_number: formData.phone,
           cleaner_preference: formData.cleanerPreference,
-          subscription_id: selectedSubscription.id, // Now safe to access
+          subscription_id: selectedSubscription.id,
           frequency_id: selectedCleaningFrequencyId, // Include frequency ID
         },
       ]);
       if (error) throw error;
-  
+
       toast.success('We will get back to you soon');
       setModalOpen(false);
       setFormData({ name: '', email: '', phone: '', cleanerPreference: '' });
@@ -116,26 +89,12 @@ const PreSubscribeComponent = () => {
       toast.error('Error submitting your details: ' + error.message);
     }
   };
-  
+
+
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
-
-        <h2 className="text-3xl font-bold text-center text-green-700 mb-8">
-          Affordable Monthly Pre-Subscription Plan.
-          
-        </h2>
-        <div className="p-8 max-w-2xl mx-auto text-center bg-white border border-gray-200 rounded-lg shadow-lg">
-  <p className="text-xl text-gray-800 font-medium leading-relaxed">
-    At <span className="font-semibold text-blue-600">Just2Kleen</span>, we&lsquo;ve got you covered with a range of carefully curated monthly subscription 
-    plans designed to suit your unique cleaning needs. Simply choose from the various options 
-    available and pre-subscribe—once you do, we&lsquo;ll reach out promptly to finalize your 
-    subscription details. Pre-subscription is available for a limited time, allowing us to match 
-    you with the right cleaner who can best meet your specific cleaning requirements. Don&lsquo;t miss 
-    this opportunity to secure a tailored cleaning plan that works perfectly for you!
-  </p>
-</div>
-
-
+    
       <div className="p-8 border border-gray-300 rounded-lg shadow-lg bg-white">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Building Type Selection */}
@@ -143,13 +102,10 @@ const PreSubscribeComponent = () => {
             <label className="block text-sm font-semibold mb-2">Building Type</label>
             <select
               value={selectedBuildingType}
-              onChange={(e) => {
-                setSelectedBuildingType(e.target.value);
-                setLastActivity(Date.now()); // Reset the inactivity timer
-              }}
+              onChange={(e) => setSelectedBuildingType(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              <option value="">Select Building..</option>
+              <option value="">Select Building Type</option>
               {uniqueBuildingTypes.map((buildingType) => (
                 <option key={buildingType} value={buildingType}>
                   {buildingType}
@@ -157,19 +113,16 @@ const PreSubscribeComponent = () => {
               ))}
             </select>
           </div>
-
+  
           {/* Number of Rooms */}
           <div>
             <label className="block text-sm font-semibold mb-2">Number of Rooms</label>
             <select
               value={selectedNumRooms}
-              onChange={(e) => {
-                setSelectedNumRooms(e.target.value);
-                setLastActivity(Date.now()); // Reset the inactivity timer
-              }}
+              onChange={(e) => setSelectedNumRooms(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              <option value="">Select No: Rooms</option>
+              <option value="">Select Number of Rooms</option>
               {filteredSubscriptions.map((subscription) => (
                 <option key={subscription.id} value={subscription.num_rooms}>
                   {subscription.num_rooms}
@@ -177,19 +130,16 @@ const PreSubscribeComponent = () => {
               ))}
             </select>
           </div>
-
+  
           {/* Cleaning Frequency */}
           <div>
             <label className="block text-sm font-semibold mb-2">Cleaning Frequency</label>
             <select
               value={selectedCleaningFrequencyId}
-              onChange={(e) => {
-                setSelectedCleaningFrequencyId(e.target.value);
-                setLastActivity(Date.now()); // Reset the inactivity timer
-              }}
+              onChange={(e) => setSelectedCleaningFrequencyId(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              <option value="">Select Frequency</option>
+              <option value="">Select Cleaning Frequency</option>
               {frequencies.map((frequency) => (
                 <option key={frequency.id} value={frequency.id}>
                   {frequency.name}
@@ -197,7 +147,7 @@ const PreSubscribeComponent = () => {
               ))}
             </select>
           </div>
-
+  
           {/* Price Range */}
           <div>
             <label className="block text-sm font-semibold mb-2">Price Range</label>
@@ -209,48 +159,54 @@ const PreSubscribeComponent = () => {
             />
           </div>
         </div>
-
+  
         {/* Check Price Button */}
         <div className="mt-6 flex justify-center">
           <button
             onClick={handleSearch}
-            className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
           >
             Check Price
           </button>
         </div>
       </div>
+  
+  
+  
 
-      {/* Display Matching Subscription Cards */}
-      {selectedSubscription && (
-        <div className="mt-8 flex justify-center">
-          <div className="p-6 border border-gray-300 rounded-lg shadow-lg max-w-sm text-center">
-            <h3 className="text-lg font-bold mb-4">Monthly Subscription For:</h3>
-            <p className="mb-2">
-              <strong>Building Type:</strong> {selectedSubscription.building_type}
-            </p>
-            <p className="mb-2">
-              <strong>Number of Rooms:</strong> {selectedSubscription.num_rooms}
-            </p>
-            <p className="mb-2">
-              <strong>Frequency:</strong>{' '}
-              {frequencies.find((f) => f.id === selectedSubscription.frequency_id)?.name}
-            </p>
-            <p className="mb-4 text-xl font-semibold text-green-600">
-              <strong>Price:</strong> ₦{selectedSubscription.price}
-            </p>
-            <p className="mb-4">
-              <strong>Description:</strong> {selectedSubscription.description}
-            </p>
-            <button
-              onClick={() => setModalOpen(true)}
-              className="w-full px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Pre-Subscribe Now
-            </button>
-          </div>
-        </div>
-      )}
+
+
+
+  {/* Display Matching Subscription Cards */}
+{selectedSubscription && (
+  <div className="mt-8 flex justify-center">
+    <div className="p-6 border border-gray-300 rounded-lg shadow-lg max-w-sm text-center">
+      <h3 className="text-lg font-bold mb-4">Monthly Subscription For:</h3>
+      <p className="mb-2">
+        <strong>Building Type:</strong> {selectedSubscription.building_type}
+      </p>
+      <p className="mb-2">
+        <strong>Number of Rooms:</strong> {selectedSubscription.num_rooms}
+      </p>
+      <p className="mb-2">
+        <strong>Frequency:</strong>{' '}
+        {frequencies.find((f) => f.id === selectedSubscription.frequency_id)?.name}
+      </p>
+      <p className="mb-4 text-xl font-semibold text-green-600">
+        <strong>Price:</strong> ₦{selectedSubscription.price}
+      </p>
+      <p className="mb-4">
+        <strong>Description:</strong> {selectedSubscription.description}
+      </p>
+      <button
+        onClick={() => setModalOpen(true)}
+        className="w-full px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Pre-Subscribe Now
+      </button>
+    </div>
+  </div>
+)}
 
       {/* Modal for Collecting Client Details */}
       {modalOpen && (
@@ -272,7 +228,7 @@ const PreSubscribeComponent = () => {
                   required
                 />
               </div>
-
+  
               {/* Email Address */}
               <div className="mb-4">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -287,7 +243,7 @@ const PreSubscribeComponent = () => {
                   required
                 />
               </div>
-
+  
               {/* Phone Number */}
               <div className="mb-4">
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
@@ -302,7 +258,7 @@ const PreSubscribeComponent = () => {
                   required
                 />
               </div>
-
+  
               {/* Cleaner Preference */}
               <div className="mb-4">
                 <label htmlFor="cleanerPreference" className="block text-sm font-medium text-gray-700">
@@ -317,18 +273,19 @@ const PreSubscribeComponent = () => {
                   required
                 />
               </div>
-
-              <div className="flex justify-between items-center">
+  
+              {/* Submit and Cancel Buttons */}
+              <div className="flex justify-end space-x-4">
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="text-sm font-medium text-gray-600 hover:text-gray-800"
+                  className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Submit
                 </button>
@@ -339,6 +296,7 @@ const PreSubscribeComponent = () => {
       )}
     </div>
   );
+  
 };
 
 export default PreSubscribeComponent;

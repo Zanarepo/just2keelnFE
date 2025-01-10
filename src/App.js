@@ -77,8 +77,8 @@ import CleaningPricesForm from "./components/Homepage/CleaningPricesForm"
 import CleaningServicesSlideshow from "./components/Homepage/CleaningServicesSlideshow"
 import Post from "./components/QuotesDashboard/Post"
 import CleaningOfferingsSlideshow from "./components/Homepage/CleaningOfferingsSlideshow"
-
-
+import AdminCleaningPrices from  "./components/AdminDashboard/AdminCleaningPrices"
+import Subsription from "./components/Homepage/Subsription"
 
 
 
@@ -115,6 +115,7 @@ function App() {
       <Route path="admin-guestbooking" element={<AdminGuestBooking/>} />
       <Route path="admin-cleanersschedule" element={<AdminCleanerSchedules/>} />
       <Route path="general-dashboards" element={<GeneralDashboards/>} />
+      <Route path="/admin-cleaningprice" element={<AdminCleaningPrices/>} />
       
 
 </Route>
@@ -227,9 +228,11 @@ function App() {
     <Route path="/manage-payment" element={<ManagePayments />} />
     <Route path="/services-slides" element={<CleaningServicesSlideshow />} />
     <Route path="/offering-slides" element={<CleaningOfferingsSlideshow />} />
+    <Route path="/subscription" element={<Subsription/>} />
+    
     </Route>
 
-
+    
     <Route>
     <Route path="/client-list" element={<ClientList />} />
     <Route path="/client-subscriptions" element={<ClientSubscriptions/>} />
