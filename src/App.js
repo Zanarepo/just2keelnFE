@@ -79,7 +79,8 @@ import Post from "./components/QuotesDashboard/Post"
 import CleaningOfferingsSlideshow from "./components/Homepage/CleaningOfferingsSlideshow"
 import AdminCleaningPrices from  "./components/AdminDashboard/AdminCleaningPrices"
 import Subsription from "./components/Homepage/Subsription"
-
+import ForgotPasswordForm from './components/CustomeAuth/ForgotPasswordForm';
+import ResetPasswordForm from './components/CustomeAuth/ResetPasswordForm';
 
 
 function App() {
@@ -94,8 +95,10 @@ function App() {
           <Route path="about" element={<About/>} />
           <Route path="sign" element={<SignIn />} />
           <Route path="register" element={<Register/>} />
-
           
+         
+       
+         
          
        
     
@@ -173,8 +176,8 @@ function App() {
 
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/forgots-password" element={<ForgotPassword />} />
+      <Route path="/password-reset" element={<ResetPassword />} />
       <Route path="/cleaner-signup" element={<CleanerSignup />} />
       <Route path="/client-signup" element={<ClientRegistration />} />
       <Route path="/client-reg" element={<ClientsReg />} />
@@ -186,7 +189,11 @@ function App() {
        <Route path="/post" element={<Post />} />
       <Route path="cleaner-bookings" element={<CleanerBookings />} />
       <Route path="profiles" element={<ProfileDashboard />} />
+      <Route path="/reset-password" element={<ResetPasswordForm/>} />
+      <Route path="/forgot-password" element={< ForgotPasswordForm/>} />
       <Route path="/dashboard"element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>  }
+
+      
       />
 
     {/*  Users Profile Section */}

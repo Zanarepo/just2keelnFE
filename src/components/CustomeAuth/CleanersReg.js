@@ -46,7 +46,10 @@ const CleanerRegistration = () => {
 
     try {
       // Hash the password using CryptoJS (SHA-256 in this case)
-      const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
+      const hashedPassword = CryptoJS.SHA256(password).toString(); // Hex encoding
+
+
+
 
       // Insert cleaner's profile in the database
       const { error } = await supabase
@@ -78,6 +81,18 @@ const CleanerRegistration = () => {
     }
   };
 
+
+
+
+
+
+
+
+
+
+
+
+  
   return (
     <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold text-green-500 mb-4 text-center">Cleaner Registration</h2>

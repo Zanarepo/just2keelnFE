@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
-
+import CryptoJS from 'crypto-js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,20 +9,19 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('service-provider');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-  
-    // Table mapping based on userType
+
     const tableMapping = {
       'service-provider': 'cleaners_main_profiles',
       client: 'clients_main_profiles',
       admin: 'admin_profiles',
     };
-  
+
     const tableName = tableMapping[userType];
-  
+
     try {
       // Fetch user details from the appropriate table
       const { data, error } = await supabase
@@ -30,47 +29,51 @@ const SignIn = () => {
         .select('id, email, password, full_name')
         .eq('email', email)
         .single();
-  
+
       if (error || !data) {
         toast.error('User not found or incorrect email.');
         return;
       }
-  
-      // Store common email in localStorage
-      localStorage.setItem('email', email);
-    
-      // Store specific user type email
-      if (userType === 'service-provider') {
-        localStorage.setItem('cleaner_email', email);
-      } else if (userType === 'client') {
-        localStorage.setItem('client_email', email);
-      } else if (userType === 'Admin') {
-        localStorage.setItem('admin_email', email);
+
+      // Hash the entered password using the same algorithm as during registration
+      const hashedPassword = CryptoJS.SHA256(password).toString(); // Hex encoding
+
+
+
+      // Compare the hashed password with the stored password
+      if (hashedPassword !== data.password) {
+        toast.error('Incorrect password.');
+        return;
       }
-      
-      
 
-
-      // Store user type for future reference
+      // Store email and user type in localStorage
+      localStorage.setItem('email', email);
+      localStorage.setItem(`${userType}_email`, email); // Store specific user type email
       localStorage.setItem('user_type', userType);
-  
+
       // Display success message
       toast.success(`Welcome, ${data.full_name}!`);
-  
-      // Redirect to appropriate dashboard based on user type
+
+      // Redirect to appropriate dashboard
       if (userType === 'client') {
-        navigate('/clientdashboard'); // Redirect to Client Dashboard
+        navigate('/clientdashboard');
       } else if (userType === 'admin') {
-        navigate('/admindashboard'); // Redirect to Admin Dashboard
+        navigate('/admindashboard');
       } else {
-        navigate('/profile-pages'); // Default to service-provider profile
+        navigate('/profile-pages');
       }
     } catch (err) {
       toast.error('An error occurred during login.');
-      console.error(err);
+      console.error('SignIn Error:', err);
     }
   };
-  
+
+
+
+
+
+
+
 
 
 

@@ -3,6 +3,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { supabase } from '../../supabaseClient';
 
+
+
+
+
+
+
 const ClientRegistration = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');

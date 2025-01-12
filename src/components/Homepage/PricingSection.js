@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { supabase } from '../../supabaseClient'; // Assuming supabaseClient is set up
+import PricingOptionsComponent from "../Homepage/PricingOptionsComponent"
 
 const PreSubscribeComponent = () => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -119,21 +120,9 @@ const PreSubscribeComponent = () => {
   
   return (
     <div className="p-6 max-w-4xl mx-auto">
+<PricingOptionsComponent/>
+       
 
-        <h2 className="text-3xl font-bold text-center text-green-700 mb-8">
-          Affordable Monthly Pre-Subscription Plan.
-          
-        </h2>
-        <div className="p-8 max-w-2xl mx-auto text-center bg-white border border-gray-200 rounded-lg shadow-lg">
-  <p className="text-xl text-gray-800 font-medium leading-relaxed">
-    At <span className="font-semibold text-blue-600">Just2Kleen</span>, we&lsquo;ve got you covered with a range of carefully curated monthly subscription 
-    plans designed to suit your unique cleaning needs. Simply choose from the various options 
-    available and pre-subscribe—once you do, we&lsquo;ll reach out promptly to finalize your 
-    subscription details. Pre-subscription is available for a limited time, allowing us to match 
-    you with the right cleaner who can best meet your specific cleaning requirements. Don&lsquo;t miss 
-    this opportunity to secure a tailored cleaning plan that works perfectly for you!
-  </p>
-</div>
 
 
       <div className="p-8 border border-gray-300 rounded-lg shadow-lg bg-white">

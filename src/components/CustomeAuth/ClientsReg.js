@@ -54,7 +54,8 @@ const ClientRegistration = () => {
       }
 
       // Hash the password using CryptoJS (SHA-256 in this case)
-      const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
+      const hashedPassword = CryptoJS.SHA256(password).toString(); // Hex encoding
+
 
       // Insert client's profile in the database
       const { error } = await supabase

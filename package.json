@@ -6,6 +6,7 @@
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.47.10",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "cra-template": "1.2.0",
     "crypto-browserify": "^3.12.1",
     "crypto-js": "^4.2.0",

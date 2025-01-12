@@ -6,6 +6,8 @@ import Home from "./Home";
 import About from "./About";
 import Register from "../CustomeAuth/Register";
 import SignIn from "../CustomeAuth/SignIn";
+//import ForgotPasswordForm from "../CustomeAuth/ForgotPasswordForm";
+//import ResetPasswordForm from "../CustomeAuth/ResetPasswordForm";
 
 
 
@@ -22,7 +24,8 @@ const HomePageLayout = () => {
           <Route path="/about" element={<About />} />
           <Route path="/sign" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
-          
+    
+  
           
     
           

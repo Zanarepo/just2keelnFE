@@ -4,6 +4,8 @@ import { toast } from 'react-toastify'; // For notifications
 import 'react-toastify/dist/ReactToastify.css';
 import { supabase } from "../../supabaseClient";// Your Supabase client instance
 
+
+
 const CleanerRegistration = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');

@@ -6,7 +6,7 @@ import CTASection from './CTASection';
 //import AboutUsSection from './AboutUsSection';
 import FeaturesKleen from './Features';
 import PricingSection from './PricingSection';
-import TestimonialsSection from './TestimonialsSection';
+//import TestimonialsSection from './TestimonialsSection';
 import FAQSection from './FAQSection';
 import SearchAndBookComponent from "../QuotesDashboard/SearchAndBookComponent"; // Import the search component
 import CleaningPricesForm from "../Homepage/CleaningPricesForm"; // Import the CleaningPricesForm component
@@ -53,7 +53,7 @@ const HomePage = () => {
    
       <FeaturesKleen />
       <PricingSection />
-      <TestimonialsSection />
+     {/* <TestimonialsSection />  ToastContainer added here */}
       <FAQSection />
 
       {/* ToastContainer added here */}
