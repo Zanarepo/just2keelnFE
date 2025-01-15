@@ -7,8 +7,8 @@ import ClientServicesDashboard from "../ClientsActivities/ClientServicesDashboar
 import AdminWelcomePage from "../AdminDashboard/AdminWelcomePage";
 import ManageBids  from "../BookingsProcess/ManageBids";
 import AdminQuoteRequests  from "../AdminDashboard/AdminQuoteRequests";
-import AdminGuestQuotesRequest from "../AdminDashboard/AdminGuestQuotesRequest"
-import  AdminBids from "../AdminDashboard/AdminBids"
+//import AdminGuestQuotesRequest from "../AdminDashboard/AdminGuestQuotesRequest"
+import  AdminBids from "../AdminDashboard/ClientsQuotesandBookings"
 import  AdminGuestBooking from "../AdminDashboard/AdminGuestBooking"
 import AdminCleanerSchedules from "../AdminDashboard/AdminCleanerSchedules"
 import GeneralDashboards from "../AdminDashboard/GeneralDashboards"
@@ -110,7 +110,7 @@ const AdminLayout = () => {
         <Route path="/admindashboard" element={<AdminWelcomePage />} />
         <Route path="/manage-bids" element={<ManageBids />} />
        <Route path="/admin-quoterequest" element={< AdminQuoteRequests />} />
-        <Route path="/admin-guestquotesreq" element={< AdminGuestQuotesRequest />} />
+       
         <Route path="/admin-bids" element={< AdminBids />} />
          <Route path="/general-dashboards" element={<GeneralDashboards/>} />
         <Route path="/admin-guestbooking" element={<AdminGuestBooking/>} />

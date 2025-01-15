@@ -147,39 +147,43 @@ const BidDetails = () => {
           </thead>
           <tbody>
         
-              {bidDetails.map((detail) => {
-                const isAccepted = detail.bid.status === 'Accepted';
-                const isRejected = detail.bid.status === 'Rejected';
+          {bidDetails.map((detail) => {
+  // Check if detail.bid exists to prevent accessing properties of null or undefined
+  if (!detail.bid) {
+    return null; // Or you can display a fallback UI, like a placeholder row
+  }
 
-                return (
-                    <tr
-                    key={detail.bid.id}
-                    className={`${
-                      isAccepted ? 'bg-white-100 border-l-4 border-green-500' : ''
-                    } ${isRejected ? 'bg-white-100 border-l-4 border-red-500' : ''} hover:bg-gray-50 transition duration-200`}
-                  >
-                    <td className="px-6 py-3 border border-gray-300 text-gray-700">{detail.quoteRequest.full_name}</td>
-                    <td className="px-6 py-3 border border-gray-300 text-gray-700">₦{detail.bid.approved_amount}</td>
-                    <td className="px-6 py-3 border border-gray-300">
-                      <span
-                        className={`inline-block px-3 py-1 text-sm font-medium rounded ${
-                          isAccepted ? 'bg-green-200 text-green-800' : isRejected ? 'bg-red-200 text-red-800' : 'bg-yellow-200 text-yellow-800'
-                        }`}
-                      >
-                        {detail.bid.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-3 border border-gray-300">
-                      <button
-                        onClick={() => handleViewRequest(detail.bid.id)}
-                        className="px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                      >
-                        View
-                      </button>
-                    </td>
-                  </tr>
-                  
-                );
+  const isAccepted = detail.bid.status === 'Accepted';
+  const isRejected = detail.bid.status === 'Rejected';
+
+  return (
+    <tr
+      key={detail.bid.id}
+      className={`${
+        isAccepted ? 'bg-white-100 border-l-4 border-green-500' : ''
+      } ${isRejected ? 'bg-white-100 border-l-4 border-red-500' : ''} hover:bg-gray-50 transition duration-200`}
+    >
+      <td className="px-6 py-3 border border-gray-300 text-gray-700">{detail.quoteRequest.full_name}</td>
+      <td className="px-6 py-3 border border-gray-300 text-gray-700">₦{detail.bid.approved_amount}</td>
+      <td className="px-6 py-3 border border-gray-300">
+        <span
+          className={`inline-block px-3 py-1 text-sm font-medium rounded ${
+            isAccepted ? 'bg-green-200 text-green-800' : isRejected ? 'bg-red-200 text-red-800' : 'bg-yellow-200 text-yellow-800'
+          }`}
+        >
+          {detail.bid.status}
+        </span>
+      </td>
+      <td className="px-6 py-3 border border-gray-300">
+        <button
+          onClick={() => handleViewRequest(detail.bid.id)}
+          className="px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+          View
+        </button>
+      </td>
+    </tr>
+  );
               })}
             </tbody>
           </table>

@@ -6,7 +6,7 @@ import PersonalDetails from "../CleanersDashboard/PersonalDetails";
 import ProfilePages from "../CleanersDashboard/ProfilePages";
 import SubmitBid from "../QuotesDashboard/SubmitBid";
 import CleanerQuoteDb from "../CleanersDashboard/CleanerQuoteDb"
-import CleanerBids from "../QuotesDashboard/CleanerBids"
+import CleanerBids from "../QuotesDashboard/CleanerClientsBids"
 import BidsDashboard from "../CleanersDashboard/BidsDashboard"
 import CleanerSchedules from "../CleanersDashboard/CleanerSchedules"
 import CleanerBookingDetails from "../CleanersDashboard/CleanerBookingDetails"
@@ -15,7 +15,7 @@ import GuestBookingsComponent from "../BookingsProcess/GuestBookingsComponent"
 import GuestQuoteRequests from "../BookingsProcess/GuestQuoteRequests"
 import BidDetails   from "../BookingsProcess/BidDetails"
 import GuestandClientQuoteDashboard   from "../BookingsProcess/GuestandClientQuoteDashboard"
-
+import GuestQuoteBidding from "../QuotesDashboard/GuestQuoteBidding";
 
 import { HomeIcon, UserIcon, CogIcon } from "@heroicons/react/24/outline";
 import { FaSignOutAlt, FaTasks  } from 'react-icons/fa';
@@ -26,7 +26,7 @@ const ProvidersLayout = () => {
 
   const menuItems = [
     { name: "Home", icon: <HomeIcon className="h-6 w-6" />, route: "/" },
-    { name: "My Profile", icon: <UserIcon className="h-6 w-6" />, route: "/profile-pages" },
+    { name: "My Profile", icon: <UserIcon className="h-6 w-6" />, route: "/cleanerdashboard" },
     { name: "Dashboard", icon: <FaTasks  className="h-6 w-6" />, route: "/bids-dashboard" },
     { name: "Settings", icon: <CogIcon className="h-6 w-6" />, route: "/settings" },
     { name: "Logout", icon: <FaSignOutAlt className="h-6 w-6" />, route: "/logout" },
@@ -97,7 +97,7 @@ const ProvidersLayout = () => {
           {/* Add routes for each component */}
           <Route path="/profile" element={<ProfileDashboard />} />
           <Route path="/profile-verification" element={<ProfileVerification />} />
-          <Route path="/profile-pages" element={<ProfilePages />} />
+          <Route path="/cleanerdashboard" element={<ProfilePages />} />
           <Route path="/personal-details" element={<PersonalDetails />} />
           <Route path="/submit-bid" element={<SubmitBid />} />
           <Route path="/cleaner-quotedb" element={<CleanerQuoteDb />} />
@@ -110,7 +110,7 @@ const ProvidersLayout = () => {
           <Route path="guest-quotes" element={<GuestQuoteRequests />} />
           <Route path="bids-details" element={<BidDetails />} />
           <Route path="/quote-bookingdashboard" element={<GuestandClientQuoteDashboard />} />
-
+          <Route path="/cleaners-guestbid" element={<GuestQuoteBidding />} />
         </Routes>
       </div>
     </div>

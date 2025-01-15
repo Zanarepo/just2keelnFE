@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../../supabaseClient';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import BookingsSection from '../ClientProfile/BookingsSection';
 
 const servicesList = [
     'House Cleaning',
@@ -49,10 +50,10 @@ const handleSearch = async () => {
     .ilike('service_locations', `%${location}%`);
 
   if (error) {
-    toast.error('Error fetching providers');
+    toast.error('Error fetching Cleaners');
   } else {
     setProviders(data);
-    toast.success('Providers found in your area');
+    toast.success('Cleaners found in your area');
   }
 };
 
@@ -62,9 +63,9 @@ const handleSearch = async () => {
       toast.error('Please select at least one service.');
       return;
     }
-  
+   
     // Retrieve client ID from local storage or session (assuming email is stored)
-    const clientEmail = localStorage.getItem('client_email');
+    const clientEmail = localStorage.getItem('email');
     if (!clientEmail) {
       toast.error('Client email not found.');
       return;
@@ -110,12 +111,17 @@ const handleSearch = async () => {
 
 // JSX for rendering
 return (
-  <div className="min-h-screen w-full p-6 bg-gray-50">
-    {/* Search Form */}
-    {!providers.length ? (
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-semibold text-green-600 mb-4">Request Cleaning Services</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+  <div className="min-h-screen w-full p-6 bg-white-300">
+  <BookingsSection />
+
+  {/* Search Form */}
+  {!providers.length ? (
+    <div className="w-full lg:max-w-7xl mx-auto bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-lg sm:text-xl font-semibold text-center text-green-600">
+        Search & Book a Cleaning Service
+      </h2>
+      <div className="space-y-6">
+
           {/* Location */}
           <div>
             <label className="block text-gray-700">Location</label>
@@ -127,7 +133,7 @@ return (
               className="w-full border rounded px-3 py-2"
             />
           </div>
-          
+
           {/* Budget */}
           <div>
             <label className="block text-gray-700">Budget</label>
@@ -139,9 +145,9 @@ return (
               className="w-full border rounded px-3 py-2"
             />
           </div>
-          
+
           {/* Service Types */}
-          <div className="col-span-2">
+          <div>
             <label className="block text-gray-700">Types of Services Needed</label>
             <div className="flex flex-wrap gap-2 mt-2">
               {servicesList.map((service) => (
@@ -149,7 +155,9 @@ return (
                   key={service}
                   type="button"
                   className={`py-2 px-4 rounded-full border ${
-                    selectedServices.includes(service) ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'
+                    selectedServices.includes(service)
+                      ? 'bg-green-600 text-white'
+                      : 'bg-gray-200 text-gray-700'
                   }`}
                   onClick={() => handleServiceChange(service)}
                 >
@@ -158,8 +166,8 @@ return (
               ))}
             </div>
           </div>
-          
-          {/* Other Fields */}
+
+          {/* Number of Rooms */}
           <div>
             <label className="block text-gray-700">Number of Rooms</label>
             <input
@@ -170,6 +178,8 @@ return (
               className="w-full border rounded px-3 py-2"
             />
           </div>
+
+          {/* Building Type */}
           <div>
             <label className="block text-gray-700">Building Type</label>
             <select
@@ -183,6 +193,7 @@ return (
             </select>
           </div>
 
+          {/* Building Condition */}
           <div>
             <label className="block text-gray-700">Building Condition</label>
             <select
@@ -196,8 +207,9 @@ return (
             </select>
           </div>
 
-          <div>
-            <label className="block text-gray-700">Does the facility have water?</label>
+          {/* Has Water */}
+          <div className="flex items-center">
+            <label className="block text-gray-700 mr-4">Does the facility have water?</label>
             <input
               type="checkbox"
               checked={hasWater}
@@ -206,7 +218,8 @@ return (
             />
           </div>
 
-          <div className="col-span-2">
+          {/* Special Request */}
+          <div>
             <label className="block text-gray-700">Special Request (Optional)</label>
             <textarea
               value={specialRequest}
@@ -215,19 +228,21 @@ return (
               className="w-full border rounded px-3 py-2"
             />
           </div>
+
+          {/* Submit Button */}
+          <button
+            onClick={handleSearch}
+            className="mt-6 w-full bg-green-600 text-white py-2 px-4 rounded"
+          >
+            Search Providers
+          </button>
         </div>
-        <button
-          onClick={handleSearch}
-          className="mt-6 w-full bg-green-600 text-white py-2 px-4 rounded"
-        >
-          Search Providers
-        </button>
-      </div>
+        </div>
     ) : (
       <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
         <div className="text-center">
         <h2 className="text-2xl font-semibold text-green-600 mb-4">
-            Providers Available in Your Area
+           Cleaing Specialist Available in Your Area
         </h2>
         </div>
 
@@ -261,6 +276,7 @@ return (
         </div>
       </div>
     )}
+     
   </div>
 );
 

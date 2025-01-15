@@ -73,31 +73,46 @@ const BookingsSection = () => {
 
   if (loading) return <div>Loading...</div>;
 
+
+
+  
   return (
-    <div className="bg-white p-6 shadow rounded">
-      <h3 className="text-2xl font-semibold text-center mb-6 text-green-500">My Bookings</h3>
+    <div className="bg-white p-6 ">
+    
+      <h3 className="text-lg sm:text-xl font-semibold text-center text-green-600 p-6">My Cleaners Bookings</h3>
       {bookings.length === 0 ? (
         <p className="text-gray-500">No bookings found.</p>
       ) : (
         <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 px-4 py-2">Cleaner</th>
-              <th className="border border-gray-300 px-4 py-2">Service Type</th>
-          
-              <th className="border border-gray-300 px-4 py-2">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookings.map((booking) => (
-              <tr key={booking.booking_id}>
-                <td className="border border-gray-300 px-4 py-2">{booking.cleanerName}</td>
-                <td className="border border-gray-300 px-4 py-2">{booking.services}</td>
-                
-                <td className="border border-gray-300 px-4 py-2">{booking.status}</td>
-              </tr>
-            ))}
-          </tbody>
+    <thead>
+    <tr className="bg-green-200 text-sm text-gray-600">
+        <th className="border border-gray-300 px-4 py-2 text-left">Cleaner</th>
+        <th className="border border-gray-300 px-4 py-2 text-left">Service Type</th>
+        <th className="border border-gray-300 px-4 py-2 text-left">Status</th>
+      </tr>
+    </thead>
+    <div className="overflow-x-auto"></div>
+    <tbody>
+      {bookings.map((booking) => (
+        <tr key={booking.booking_id} className="hover:bg-gray-50 transition duration-200">
+          <td className="border border-gray-300 px-4 py-2 text-left">{booking.cleanerName}</td>
+          <td className="border border-gray-300 px-4 py-2 text-left">{booking.services}</td>
+          <td className="border border-gray-300 px-4 py-2 text-left">
+            <span
+              className={`px-2 py-1 text-sm rounded-full ${
+                booking.status === 'Completed'
+                  ? 'bg-green-200 text-green-600'
+                  : booking.status === 'Pending'
+                  ? 'bg-yellow-200 text-yellow-600'
+                  : 'bg-red-200 text-red-600'
+              }`}
+            >
+              {booking.status}
+            </span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
         </table>
       )}
     </div>

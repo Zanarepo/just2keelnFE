@@ -3,6 +3,7 @@ import { supabase } from '../../supabaseClient';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AnonRequestQuoteForm from './AnonRequestQuoteForm'; // Adjust the path as needed
+//import GuestQuoteRequest from '../QuotesDashboard/GuestQuoteRequest';
 
 const CleanerSearch = () => {
   const [state, setState] = useState('');
@@ -160,7 +161,6 @@ const CleanerSearch = () => {
       </div>
     ))}
   </div>
-
   {showRequestForm && selectedCleaner && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-white p-6 rounded-lg w-full max-w-4xl sm:max-w-3xl md:max-w-2xl lg:max-w-2xl xl:max-w-2xl relative overflow-auto max-h-[90vh]">
@@ -177,7 +177,12 @@ const CleanerSearch = () => {
         {/* Right Section (Form) */}
         <div className="sm:w-full sm:max-w-2xl overflow-auto">
           <h3 className="text-xl font-bold mb-4">Request Quote for {selectedCleaner.full_name}</h3>
-          <AnonRequestQuoteForm cleaner={selectedCleaner} onClose={() => setShowRequestForm(false)} />
+          
+          {/* Pass cleaner ID to AnonRequestQuoteForm */}
+          <AnonRequestQuoteForm 
+            cleanerId={selectedCleaner.id} 
+            onClose={() => setShowRequestForm(false)} 
+          />
 
           {/* Close Button below the form for accessibility */}
           <div className="mt-6 sm:mt-8">

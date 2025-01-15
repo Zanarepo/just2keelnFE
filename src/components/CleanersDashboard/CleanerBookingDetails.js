@@ -10,7 +10,7 @@ const CleanerBookingDetails = () => {
   const [modalOpen, setModalOpen] = useState(false); // For controlling modal visibility
 
   // Retrieve the cleaner's email from local storage
-  const cleanerEmail = localStorage.getItem('cleaner_email');
+  const cleanerEmail = localStorage.getItem('email');
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -176,12 +176,15 @@ const CleanerBookingDetails = () => {
   }
 
   return (
-    <div className="p-4 mt-16">
+    <div className="p-4 mt-4">
 
-      <h2 className="text-2xl font-semibold text-center mb-6 text-green-600">Bookings</h2>
+      <h2 className="text-2xl font-semibold text-center mb-6 text-green-600 p-4">Bookings</h2>
+      
+      <h1 className="text-base text-left text-gray-600 mb-4">Here you manage all the direct bookings from either regular or new clients</h1>
+
       <table className="w-full table-auto border-collapse border border-gray-200">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className="bg-green-200 text-sm text-gray-600">
             <th className="border p-2">Client Name</th>
             <th className="border p-2">Address</th>
             <th className="border p-2">Phone Number</th>

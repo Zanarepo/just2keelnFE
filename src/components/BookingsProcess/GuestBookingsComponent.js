@@ -1,153 +1,132 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';  // Import toastify
+import 'react-toastify/dist/ReactToastify.css';  // Import toast styles
 
-const CleanerBookingDetails = () => {
+const GuestBookingsComponent = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedBooking, setSelectedBooking] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const cleanerEmail = localStorage.getItem('cleaner_email');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      if (!cleanerEmail) {
-        toast.error('Cleaner email not found.');
-        setLoading(false);
-        return;
-      }
-
-      setLoading(true);
+    const fetchCleanerIdAndBookings = async () => {
       try {
-        // Fetch cleaner ID using the email
+        setLoading(true);
+
         const { data: cleanerData, error: cleanerError } = await supabase
           .from('cleaners_main_profiles')
           .select('id')
-          .eq('email', cleanerEmail)
+          .eq('email', localStorage.getItem('email'))
           .single();
 
         if (cleanerError) {
-          toast.error('Failed to fetch cleaner profile.');
+          setError('Error fetching cleaner ID');
           console.error(cleanerError);
-          setLoading(false);
           return;
         }
 
-        const cleanerId = cleanerData.id;
+        const cleanerId = cleanerData?.id;
 
-        // Fetch bookings where service_provider_id matches cleanerId
+        if (!cleanerId) {
+          setError('Cleaner ID not found');
+          return;
+        }
+
         const { data: bookingsData, error: bookingsError } = await supabase
-          .from('guest_bookings')
+          .from('guest_cleaners_bookings')
           .select('*')
-          .eq('service_provider_id', cleanerId)
-          .order('created_at', { ascending: false });
+          .eq('cleaner_id', cleanerId);
 
         if (bookingsError) {
-          toast.error('Failed to fetch bookings.');
+          setError('Error fetching bookings');
           console.error(bookingsError);
-          setLoading(false);
-          return;
+        } else {
+          setBookings(bookingsData);
         }
-
-        setBookings(bookingsData);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        toast.error('An error occurred while fetching data.');
+      } catch (err) {
+        setError('An unexpected error occurred');
+        console.error(err);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchBookings();
-  }, [cleanerEmail]);
+    fetchCleanerIdAndBookings();
+  }, []);
 
-  const handleAccept = async (id) => {
-    try {
-      const { error } = await supabase
-        .from('guest_bookings')
-        .update({ status: 'Accepted' })
-        .eq('id', id); // Correct column used: 'id'
-  
-      if (error) {
-        toast.error('Failed to accept booking.');
-        return;
-      }
-  
-      setBookings((prev) =>
-        prev.map((booking) =>
-          booking.id === id ? { ...booking, status: 'Accepted' } : booking
-        )
-      );
-      toast.success('Booking accepted successfully.');
-    } catch (error) {
-      console.error('Error accepting the booking:', error);
-      toast.error('An error occurred while accepting the booking.');
-    }
-  };
-  
-  const handleReject = async (id) => {
-    try {
-      const { error } = await supabase
-        .from('guest_bookings')
-        .update({ status: 'Rejected' })
-        .eq('id', id); // Correct column used: 'id'
-  
-      if (error) {
-        toast.error('Failed to reject booking.');
-        return;
-      }
-  
-      setBookings((prev) =>
-        prev.map((booking) =>
-          booking.id === id ? { ...booking, status: 'Rejected' } : booking
-        )
-      );
-      toast.success('Booking rejected successfully.');
-    } catch (error) {
-      console.error('Error rejecting the booking:', error);
-      toast.error('An error occurred while rejecting the booking.');
-    }
-  };
-  
+  if (loading) return <p>Loading bookings...</p>;
+  if (error) return <p>{error}</p>;
+  if (bookings.length === 0) return <p>No bookings found.</p>;
+
   const handleViewDetails = (booking) => {
     setSelectedBooking(booking);
-    setModalOpen(true);
+    setShowModal(true);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setSelectedBooking(null);
+  const handleAccept = async () => {
+    try {
+      await supabase
+        .from('guest_cleaners_bookings')
+        .update({ status: 'accepted' })
+        .eq('id', selectedBooking.id);
+
+      toast.success('Request accepted successfully!');  // Show success toast
+      setShowModal(false);
+      setBookings((prev) =>
+        prev.map((b) => (b.id === selectedBooking.id ? { ...b, status: 'accepted' } : b))
+      );
+    } catch (error) {
+      console.error('Error accepting request:', error);
+      toast.error('Failed to accept request.');  // Show error toast
+    }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleReject = async () => {
+    try {
+      await supabase
+        .from('guest_cleaners_bookings')
+        .update({ status: 'rejected' })
+        .eq('id', selectedBooking.id);
+
+      toast.success('Request rejected successfully!');  // Show success toast
+      setShowModal(false);
+      setBookings((prev) =>
+        prev.map((b) => (b.id === selectedBooking.id ? { ...b, status: 'rejected' } : b))
+      );
+    } catch (error) {
+      console.error('Error rejecting request:', error);
+      toast.error('Failed to reject request.');  // Show error toast
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
-    <div className="p-4 mt-16">
-      <h2 className="text-2xl font-semibold text-center mb-6 text-green-600">Your Guest Booking Request</h2>
-      <h1 className="text-base text-left text-gray-600 mb-4">Here you get notified of direct cleaning booking from a guest on the website you have access to view the details and accept or reject the booking</h1>
-       
-      <table className="w-full table-auto border-collapse border border-gray-200">
+    <div className="p-4">
+      <h2 className="text-lg sm:text-xl font-bold text-center text-green-600 p-4">My Guests Bookings</h2>
+      <table className="table-auto w-full border-collapse border border-gray-300">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="border p-2">Full Name</th>
-            <th className="border p-2">Phone Number</th>
-            <th className="border p-2">Location</th>
-            <th className="border p-2">Actions</th>
+          <tr className="bg-green-200 text-sm text-gray-600">
+            <th className="border border-gray-300 px-4 py-2">Full Name</th>
+            <th className="border border-gray-300 px-4 py-2">Location</th>
+            <th className="border border-gray-300 px-4 py-2">Budget Range</th>
+            <th className="border border-gray-300 px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
-            <tr key={booking.booking_id} className="border-b">
-              <td className="border p-2">{booking.full_name}</td>
-              <td className="border p-2">{booking.phone_number}</td>
-              <td className="border p-2">{booking.location}</td>
-              <td className="border p-2">
+            <tr key={booking.id}>
+              <td className="border border-gray-300 px-4 py-2">{booking.full_name || 'N/A'}</td>
+              <td className="border border-gray-300 px-4 py-2">{booking.location}</td>
+              <td className="border border-gray-300 px-4 py-2">{booking.budget_range}</td>
+              <td className="border border-gray-300 px-4 py-2">
                 <button
+                  className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                   onClick={() => handleViewDetails(booking)}
-                  className="px-4 py-1 bg-green-500 text-white rounded"
                 >
                   View
                 </button>
@@ -156,61 +135,55 @@ const CleanerBookingDetails = () => {
           ))}
         </tbody>
       </table>
-      {modalOpen && selectedBooking && (
-  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center p-4">
-    <div className="bg-white p-6 rounded-lg w-full max-w-lg max-h-[90vh] overflow-y-auto">
-      <h2 className="text-xl font-semibold mb-4">Booking Details</h2>
-      <div className="space-y-2">
-        <p><strong>Service:</strong> {selectedBooking.services}</p>
-        <p><strong>Number of Rooms:</strong> {selectedBooking.num_rooms}</p>
-        <p><strong>Special Request:</strong> {selectedBooking.special_request}</p>
-        <p><strong>Budget:</strong> {selectedBooking.budget}</p>
-        <p><strong>Building Type:</strong> {selectedBooking.building_type}</p>
-        <p><strong>Building Condition:</strong> {selectedBooking.building_condition}</p>
-        <p>
-          <strong>Status:</strong>{' '}
-          <span
-            className={`font-semibold ${
-              selectedBooking.status === 'Accepted'
-                ? 'text-green-600'
-                : selectedBooking.status === 'Rejected'
-                ? 'text-red-600'
-                : 'text-yellow-600'
-            }`}
-          >
-            {selectedBooking.status}
-          </span>
-        </p>
-        <p><strong>Booking Date:</strong> {new Date(selectedBooking.created_at).toLocaleString()}</p>
-      </div>
-      <div className="mt-4 flex flex-wrap gap-4 justify-between">
-        <button
-          onClick={() => handleAccept(selectedBooking.id)}
-          className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
-          Accept
-        </button>
-        <button
-          onClick={() => handleReject(selectedBooking.id)}
-          className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-        >
-          Reject
-        </button>
-        <button
-          onClick={closeModal}
-          className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-)}
 
+      {/* Modal for viewing details */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg w-full max-w-4xl sm:max-w-3xl md:max-w-2xl lg:max-w-2xl xl:max-w-2xl relative overflow-auto max-h-[90vh]">
+            {/* Close Button */}
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
+            >
+              &times;
+            </button>
 
+            <h3 className="text-xl font-bold mb-4">Booking Details</h3>
+            <p><strong>Full Name:</strong> {selectedBooking?.full_name ? selectedBooking.full_name : 'Hidden'}</p>
+            <p><strong>Email:</strong> {selectedBooking?.email || 'Hidden'}</p>
+            <p><strong>Phone:</strong> {selectedBooking?.phone_number || 'Hidden'}</p>
+            <p><strong>Service Type:</strong> {selectedBooking?.service_type}</p>
+            <p><strong>Description:</strong> {selectedBooking?.description}</p>
+            <p><strong>Budget:</strong> {selectedBooking?.budget_range}</p>
 
+            <div className="mt-6 flex justify-end gap-4">
+              <button
+                onClick={handleAccept}
+                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
+              >
+                Accept
+              </button>
+              <button
+                onClick={handleReject}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+              >
+                Reject
+              </button>
+              <button
+                onClick={handleCloseModal}
+                className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toast Container */}
+     
     </div>
   );
 };
 
-export default CleanerBookingDetails;
+export default GuestBookingsComponent;

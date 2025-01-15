@@ -5,24 +5,47 @@ import RequestQuoteForm from '../QuotesDashboard/RequestQuoteForm';
 import ApprovedBids from '../QuotesDashboard/ApprovedBids';
 import Quotedashboard from "../CleanersDashboard/Quotedashboard";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
+import 'react-toastify/dist/ReactToastify.css';
+import { supabase } from '../../supabaseClient';
 
 const BookingsDashboard = () => {
   const [activeTab, setActiveTab] = useState('Booking Form'); // Default active tab
 
   useEffect(() => {
-    // Show a welcome message when the dashboard loads
-    toast.success('Welcome to the Bookings Dashboard!');
+    const fetchUserName = async () => {
+      const email = localStorage.getItem('email'); // Retrieve email from localStorage
+      
+      if (email) {
+        const { data, error } = await supabase
+          .from('clients_main_profiles')
+          .select('full_name')
+          .eq('email', email)
+          .single(); // Fetch a single record
+
+        if (error) {
+          console.error('Error fetching user data:', error);
+          toast.error('Error retrieving your profile. Please try again.');
+        } else if (data) {
+          const fullName = data.full_name;
+          const firstName = fullName.split(' ')[0]; // Extract first name
+          toast.success(`Welcome to the Bookings Dashboard, ${firstName}!`);
+        }
+      } else {
+        toast.error('No email found. Please log in again.');
+      }
+    };
+
+    fetchUserName(); // Call the function when the component mounts
   }, []);
 
   // Function to render content based on the active tab
   const renderActiveTab = () => {
     switch (activeTab) {
-      case 'Booking Form':
+      case 'Book Cleaner':
         return <BookingForm />;
       case 'Bookings Section':
         return <BookingsSection />;
-      case 'Request Quote':
+      case 'Request Cleaning Quote':
         return <RequestQuoteForm />;
       case 'Quote Dashboard':
         return <Quotedashboard />;
@@ -37,13 +60,10 @@ const BookingsDashboard = () => {
     <div className="min-h-screen w-full bg-white">
       {/* Simplified Navbar */}
       <nav className="sticky top-0 z-10 bg-white shadow-md flex justify-around border-b">
-        {['Booking Form', 'Bookings Section', 'Request Quote', 'Quote Dashboard', 'Approved Bids'].map((tab) => (
+        {['Approved Bids','Cleaners Booking Center',  'Request Cleaning Quote' ].map((tab) => (
           <button
             key={tab}
-            onClick={() => {
-              setActiveTab(tab);
-              toast.info(`Switched to ${tab}`, { autoClose: 2000 }); // Show toast on tab switch
-            }}
+            onClick={() => setActiveTab(tab)}
             className={`px-3 py-1 text-sm rounded transition-colors duration-200 ${
               activeTab === tab
                 ? 'bg-green-500 text-white'

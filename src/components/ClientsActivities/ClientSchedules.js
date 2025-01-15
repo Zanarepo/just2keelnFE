@@ -24,9 +24,9 @@ const ClientSchedules = () => {
   // Fetch existing schedules on component mount
   useEffect(() => {
     const fetchSchedules = async () => {
-      const clientEmail = localStorage.getItem('client_email');
+      const email = localStorage.getItem('email');
       
-      if (!clientEmail) {
+      if (!email) {
         toast.error('Client not logged in.');
         return;
       }
@@ -35,7 +35,7 @@ const ClientSchedules = () => {
         const { data, error } = await supabase
           .from('clients_main_profiles')
           .select('id')
-          .eq('email', clientEmail)
+          .eq('email', email)
           .single();
 
         if (error) {
@@ -70,7 +70,7 @@ const ClientSchedules = () => {
 
   // Handle adding a new schedule
   const handleAddSchedule = async () => {
-    const clientEmail = localStorage.getItem('client_email');
+    const clientEmail = localStorage.getItem('email');
 
     if (!clientEmail) {
       toast.error('Client not logged in.');
@@ -149,24 +149,24 @@ const ClientSchedules = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white-100">
+  <div className="">
   {/* Main Heading */}
   <h2 className="text-2xl sm:text-3xl font-semibold text-green-500 mb-6 sm:mb-8 text-center mt-6 sm:mt-12">
    
   </h2>
   
-  {/* Schedule Table */}
-  <div className="mt-8">
-  <h3 className="text-xl sm:text-2xl text-center text-green-500 font-semibold mb-8 mt-6 sm:mt-12">
-  Your Schedules
-</h3>
+  <div className="mt-6 sm:mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
+  <h2 className="text-lg sm:text-xl lg:text-2xl text-center text-green-500 font-semibold mb-6 sm:mb-8 lg:mb-12">
+    Your Schedules
+  </h2>
 
-    {clientSchedule.length === 0 ? (
-      <div className="text-center">No schedules found.</div>
-    ) : (
-      <table className="min-w-full bg-white border border-gray-300 rounded-lg">
+  {clientSchedule.length === 0 ? (
+    <div className="text-center">No schedules found.</div>
+  ) : (
+    <div className="overflow-x-auto">
+      <table className="w-full bg-white border border-gray-300 rounded-lg">
         <thead>
-          <tr>
+        <tr className="bg-green-200 text-sm text-gray-600">
             <th className="py-2 px-4 border-b text-center">Service Type</th>
             <th className="py-2 px-4 border-b text-center">Service Date</th>
             <th className="py-2 px-4 border-b text-center">Service Time</th>
@@ -181,7 +181,11 @@ const ClientSchedules = () => {
               <td className="py-2 px-4 border-b text-center">{schedule.service_date}</td>
               <td className="py-2 px-4 border-b text-center">{schedule.service_time}</td>
               <td className="py-2 px-4 border-b text-center">
-                <span className={`px-3 py-1 rounded-full ${schedule.status === 'Pending' ? 'bg-yellow-300' : 'bg-green-300'}`}>
+                <span
+                  className={`px-3 py-1 rounded-full ${
+                    schedule.status === 'Pending' ? 'bg-yellow-300' : 'bg-green-300'
+                  }`}
+                >
                   {schedule.status}
                 </span>
               </td>
@@ -197,8 +201,10 @@ const ClientSchedules = () => {
           ))}
         </tbody>
       </table>
-    )}
-  </div>
+    </div>
+  )}
+</div>
+
 
   {/* Add Schedule Button */}
   <div className="text-center mt-4">

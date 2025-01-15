@@ -125,9 +125,21 @@ const PreSubscribeComponent = () => {
 
 
 
+
       <div className="p-8 border border-gray-300 rounded-lg shadow-lg bg-white">
+        
+  <div className="bg-green-700 text-white px-6 py-8 rounded-lg shadow-md text-center mb-6">
+  <h2 className="text-2xl sm:text-4xl font-bold mb-3">
+    Wondering How Much Your Perfect Cleaning Subscription Plan would Costs?
+  </h2>
+  <p className="text-base sm:text-lg mb-4">
+    Find out instantly by filling out our quick form. Get a tailored quote in seconds!
+  </p>
+ 
+</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Building Type Selection */}
+          
           <div>
             <label className="block text-sm font-semibold mb-2">Building Type</label>
             <select
@@ -240,6 +252,16 @@ const PreSubscribeComponent = () => {
           </div>
         </div>
       )}
+
+
+
+
+
+
+
+
+
+
 
       {/* Modal for Collecting Client Details */}
       {modalOpen && (

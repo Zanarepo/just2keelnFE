@@ -35,7 +35,7 @@ const AdminRegistration = () => {
       }
 
       // Hash the password before storing it
-     const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
+   const hashedPassword = CryptoJS.SHA256(password).toString();
     
       // Insert new admin into the database
       const { error: insertError } = await supabase.from('admin_profiles').insert([

@@ -2,9 +2,9 @@ import React from 'react'; // Ensure React is imported
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/Auth/SignUp';
 import Login from './components/Auth/Login';
-import ProtectedRoute from "./components/Auth/ProtectedRoute";
+//import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import ForgotPassword from "./components/Auth/ForgotPassword";
-import Dashboard from "./components/Auth/Dashboard";
+//import Dashboard from "./components/Auth/Dashboard";
 import { ToastContainer } from 'react-toastify'; // Import ToastContainer
 import ResetPassword from "./components/Auth/ResetPassword";
 import CleanerSignup from "./components/Auth/CleanerSignup";
@@ -51,7 +51,7 @@ import SubmitBid from "./components/QuotesDashboard/SubmitBid"
 import Quotedashboard from "./components/CleanersDashboard/Quotedashboard"
 import CleanerQuoteDb   from "./components/CleanersDashboard/CleanerQuoteDb"
 import ApprovedBids from "./components/QuotesDashboard/ApprovedBids"
-import CleanerBids from "./components/QuotesDashboard/CleanerBids"
+import CleanerClientsBids from "./components/QuotesDashboard/CleanerClientsBids"
 import BidsDashboard from "./components/CleanersDashboard/BidsDashboard"
 import CleanerBookingDetails from "./components/CleanersDashboard/CleanerBookingDetails"
 import BookingsDashboard from "./components/BookingsProcess/BookingsDashboard"
@@ -68,8 +68,8 @@ import ManageBids from "./components/BookingsProcess/ManageBids"
 import BidDetails   from "./components/BookingsProcess/BidDetails"
 import GuestandClientQuoteDashboard from "./components/BookingsProcess/GuestandClientQuoteDashboard"
 import AdminQuoteRequests from "./components/AdminDashboard/AdminQuoteRequests"
-import AdminGuestQuotesRequest from "./components/AdminDashboard/AdminGuestQuotesRequest"
-import  AdminBids from "./components/AdminDashboard/AdminBids"
+//import AdminGuestQuotesRequest from "./components/AdminDashboard/AdminGuestQuotesRequest"
+import  AdminBids from "./components/AdminDashboard/ClientsQuotesandBookings"
 import AdminGuestBooking from "./components/AdminDashboard/AdminGuestBooking"
 import AdminCleanerSchedules from "./components/AdminDashboard/AdminCleanerSchedules"
 import GeneralDashboards from "./components/AdminDashboard/GeneralDashboards"
@@ -81,6 +81,19 @@ import AdminCleaningPrices from  "./components/AdminDashboard/AdminCleaningPrice
 import Subsription from "./components/Homepage/Subsription"
 import ForgotPasswordForm from './components/CustomeAuth/ForgotPasswordForm';
 import ResetPasswordForm from './components/CustomeAuth/ResetPasswordForm';
+import GuestQuoteBidding from './components/QuotesDashboard/GuestQuoteBidding';
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function App() {
@@ -100,7 +113,7 @@ function App() {
        
          
          
-       
+          
     
          
         </Route>
@@ -113,7 +126,7 @@ function App() {
       <Route path="admindashboard" element={<AdminWelcomePage/>} />
       <Route path="manage-bids" element={<ManageBids/>} />
       <Route path="admin-quoterequest" element={<AdminQuoteRequests/>} />
-      <Route path="admin-guestquotesreq" element={<AdminGuestQuotesRequest/>} />
+   {/*  Dashboards <Route path="admin-guestquotesreq" element={<AdminGuestQuotesRequest/>} /> */}  
       <Route path="admin-bids" element={<AdminBids/>} />
       <Route path="admin-guestbooking" element={<AdminGuestBooking/>} />
       <Route path="admin-cleanersschedule" element={<AdminCleanerSchedules/>} />
@@ -136,17 +149,18 @@ function App() {
     <Route path="/" element={<ProvidersLayout/>}>
    
     <Route path="profiless" element={<ProfileDashboard />} />  {/*  Users Dashboard */}
-
+    
+    <Route path="cleaners-guestbid" element={<GuestQuoteBidding />} />
     <Route path="/service-section" element={<ServiceSection />} />
     <Route path="/service-location" element={<ServiceLocationYearsAvailability />} />
     <Route path="/bio" element={<MyBio />} />
     <Route path="/profile-verification" element={<ProfileVerification />} />
     <Route path="/public-dashboard" element={<PublicDashboard />} />
     <Route path="personal-details" element={<PersonalDetails />} />
-    <Route path="profile-pages" element={<ProfilePages />} />
+    <Route path="cleanerdashboard" element={<ProfilePages />} />
     <Route path="submit-bid" element={<SubmitBid />} />
     <Route path="cleaner-quotedb" element={<CleanerQuoteDb />} />
-    <Route path="cleaner-bids" element={<CleanerBids />} />
+    <Route path="cleaner-bids" element={<CleanerClientsBids />} />
     <Route path="bids-dashboard" element={<BidsDashboard />} />
     <Route path="cleaner-schedules" element={<CleanerSchedules />} />
     <Route path="bookings" element={<CleanerBookingDetails />} />
@@ -191,10 +205,10 @@ function App() {
       <Route path="profiles" element={<ProfileDashboard />} />
       <Route path="/reset-password" element={<ResetPasswordForm/>} />
       <Route path="/forgot-password" element={< ForgotPasswordForm/>} />
-      <Route path="/dashboard"element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>  }
+  {/*  Users Profile Section  <Route path="/dashboard"element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>  }*}    
 
       
-      />
+      
 
     {/*  Users Profile Section */}
 

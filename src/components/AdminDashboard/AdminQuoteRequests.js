@@ -1,8 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
 import { toast } from 'react-toastify';
+//import AdminGuestBooking from '../AdminDashboard/AdminGuestBooking'
+//import ManageBids from '../BookingsProcess/ManageBids'
 
-const CleanerQuoteRequests = () => {
+ 
+const AdminQuoteRequests = () => {
   const [quoteRequests, setQuoteRequests] = useState([]);
   const [bidAmounts, setBidAmounts] = useState({});
   const [loading, setLoading] = useState(false);
@@ -13,7 +16,7 @@ const CleanerQuoteRequests = () => {
 
     try {
       const { data: allQuoteRequests, error: quoteError } = await supabase
-        .from('guest_quote_request')
+        .from('guest_cleaners_bookings')
         .select('*');
 
       if (quoteError) throw quoteError;
@@ -79,11 +82,12 @@ const CleanerQuoteRequests = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold text-center text-green-600 mb-4">Available Quote Requests</h2>
+     
+      <h2 className="text-lg sm:text-xl font-bold text-center text-green-600 mt-4 p-4">Available Guests Quotes Requests</h2>
       <div className="mb-4">
         <button
           onClick={() => setIsAdminView(!isAdminView)}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
         >
           {isAdminView ? 'Switch to Cleaner View' : 'Switch to Admin View'}
         </button>
@@ -126,4 +130,4 @@ const CleanerQuoteRequests = () => {
   );
 };
 
-export default CleanerQuoteRequests;
+export default AdminQuoteRequests

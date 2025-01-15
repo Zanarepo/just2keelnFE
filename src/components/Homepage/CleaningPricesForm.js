@@ -8,9 +8,9 @@ const CleaningPriceComponent = () => {
   const [buildingCondition, setBuildingCondition] = useState('');
   const [numRooms, setNumRooms] = useState('');
   const [prices, setPrices] = useState([]);
-  const [contactInfo, setContactInfo] = useState({ fullName: '', phone_number: '', email: '', message: '' });
+
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+
 
   // New state for dynamic options
   const [buildingTypes, setBuildingTypes] = useState([]);
@@ -69,16 +69,8 @@ const CleaningPriceComponent = () => {
     }
   };
 
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    if (!contactInfo.fullName || !contactInfo.phone_number || !contactInfo.email || !contactInfo.message) {
-      toast.error('Please fill out all fields.');
-      return;
-    }
-    toast.success('Your message has been sent!');
-    setContactInfo({ fullName: '', phone_number: '', email: '', message: '' });
-    setShowModal(false);
-  };
+  
+
 
   
 
@@ -173,76 +165,15 @@ const CleaningPriceComponent = () => {
         <p></p>
       )}
 
-      {/* Contact Us Button */}
+      {/* Contact Us Button
       <div className="bg-green-700 text-white p-6 rounded-lg shadow-md text-center mt-6">
         <h3 className="text-2xl font-semibold mb-4">Need Specialized Services?</h3>
         <p className="mb-4">Reach out to us by filling out this form and we&apos;d get back to you as soon as possible. Thank You!</p>
-        <button
-          onClick={() => setShowModal(true)}
-          className="bg-white text-green-700 font-semibold py-2 px-6 rounded-lg shadow hover:bg-gray-100 transition duration-300"
-        >
-          Fill Out the Form
-        </button>
-      </div>
+       
+      </div> */}
 
       {/* Modal for Contact Us */}
-      {showModal && (
-        <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg w-80 relative">
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <form onSubmit={handleContactSubmit}>
-              <div className="mb-4">
-                <label htmlFor="fullName" className="block">Full Name</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  value={contactInfo.fullName}
-                  onChange={(e) => setContactInfo({ ...contactInfo, fullName: e.target.value })}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="phone_number" className="block">Phone Number</label>
-                <input
-                  type="number"
-                  id="phone_number"
-                  value={contactInfo.phone_number}
-                  onChange={(e) => setContactInfo({ ...contactInfo, phone_number: e.target.value })}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={contactInfo.email}
-                  onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="message" className="block">Message</label>
-                <textarea
-                  id="message"
-                  value={contactInfo.message}
-                  onChange={(e) => setContactInfo({ ...contactInfo, message: e.target.value })}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <button type="submit" className="w-full p-2 bg-green-600 text-white rounded">
-                Send Message
-              </button>
-            </form>
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-2 right-2 text-xl text-gray-500"
-            >
-              ×
-            </button>
-          </div>
-        </div>
-      )}
+     
     </div>
   );
 };

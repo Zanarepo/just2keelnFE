@@ -91,7 +91,8 @@ const CleanerSchedules = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold text-green-600 mb-4 text-center">Cleaner Schedules</h2>
+      <h2 className="text-lg sm:text-xl font-bold text-center text-green-600 p-6">Your Cleaning Schedules</h2>
+      <h1 className="text-base text-left text-gray-600 mb-4">This is where you manage all your cleaning schedules from your clients</h1>
 
       <div className="flex justify-left mb-4">
         <button
@@ -108,7 +109,7 @@ const CleanerSchedules = () => {
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-300">
           <thead className="bg-gray-100">
-            <tr>
+            <tr className="bg-green-200 text-sm text-gray-600" >
               <th className="p-2 border">Select</th>
               <th className="p-2 border">Client Name</th>
               <th className="p-2 border">Service Type</th>

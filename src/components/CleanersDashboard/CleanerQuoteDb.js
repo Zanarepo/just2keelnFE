@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 const CleanerDashboard = () => {
   const [quoteRequests, setQuoteRequests] = useState([]);
   const [bidAmounts, setBidAmounts] = useState({});
-  const cleanerEmail = localStorage.getItem('cleaner_email');
+  const cleanerEmail = localStorage.getItem('email');
 
   const fetchCleanerId = useCallback(async () => {
     try {

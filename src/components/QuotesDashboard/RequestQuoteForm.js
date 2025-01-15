@@ -41,7 +41,7 @@ const QuoteRequestForm = () => {
       const clientId = clientData.id;
 
       // Insert new quote request into the quote_requests table
-      const { error } = await supabase.from('quote_requests').insert({
+      const { error } = await supabase.from('clients_quote_requests').insert({
         client_id: clientId,
         location,
         service_type: serviceType,

@@ -8,7 +8,7 @@ const ClientDashboard = () => {
   const [quoteRequests, setQuoteRequests] = useState([]);
   const [selectedCleaner, setSelectedCleaner] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const clientEmail = localStorage.getItem('client_email');
+  const clientEmail = localStorage.getItem('email');
 
   const fetchQuoteRequests = useCallback(async () => {
     try {

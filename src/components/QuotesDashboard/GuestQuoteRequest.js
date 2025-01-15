@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { supabase } from '../../supabaseClient';
 import { toast } from 'react-toastify';
 
-const AnonRequestQuoteForm = ({ cleanerId, onClose = () => {} }) => {
+const GuestQuoteRequest = ({ cleanerId, onClose = () => {} }) => {
   const [serviceType, setServiceType] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
@@ -24,7 +23,7 @@ const AnonRequestQuoteForm = ({ cleanerId, onClose = () => {} }) => {
     e.preventDefault();
 
     try {
-      const { error } = await supabase.from('guest_cleaners_bookings').insert({
+      const { error } = await supabase.from('guest_quote_request').insert({
         email,
         full_name: fullName,
         phone_number: phoneNumber,
@@ -40,7 +39,7 @@ const AnonRequestQuoteForm = ({ cleanerId, onClose = () => {} }) => {
         throw error;
       }
 
-      toast.success(' Booking Submitted successfully!');
+      toast.success('Quote request submitted successfully!');
       // Clear form fields
       setServiceType('');
       setLocation('');
@@ -161,4 +160,4 @@ const AnonRequestQuoteForm = ({ cleanerId, onClose = () => {} }) => {
   );
 };
 
-export default AnonRequestQuoteForm;
+export default GuestQuoteRequest;
