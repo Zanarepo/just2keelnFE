@@ -214,13 +214,12 @@ const CleanerBookingDetails = () => {
           })}
         </tbody>
       </table>
-
-     {modalOpen && selectedBooking && (
+      {modalOpen && selectedBooking && (
   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-    <div className="bg-white p-6 rounded-lg w-1/2">
-      <h2 className="text-xl font-semibold mb-4">Booking Details</h2>
+    <div className="bg-white p-6 rounded-lg w-full sm:w-4/5 md:w-3/4 lg:w-1/2 xl:w-1/3 max-h-[90vh] overflow-auto">
+      <h2 className="text-xl sm:text-2xl font-semibold mb-4">Booking Details</h2>
       {/* Display booking details */}
-      <div className="space-y-2">
+      <div className="space-y-2 mb-4">
         <p><strong>Booking ID:</strong> {selectedBooking.booking_id}</p>
         <p><strong>Service:</strong> {selectedBooking.services}</p>
         <p><strong>Special Request:</strong> {selectedBooking.special_request}</p>
@@ -228,30 +227,28 @@ const CleanerBookingDetails = () => {
         <p><strong>Status:</strong> {selectedBooking.status}</p>
         <p><strong>Location:</strong> {selectedBooking.location}</p>
         <p><strong>Budget:</strong> {selectedBooking.budget}</p>
-        <p><strong>Status:</strong> {selectedBooking.status}</p>
         <p><strong>Building Type:</strong> {selectedBooking.building_type}</p>
         <p><strong>Building Condition:</strong> {selectedBooking.building_condition}</p>
-      
-        
         <p><strong>Booking Date:</strong> {new Date(selectedBooking.created_at).toLocaleString()}</p>
       </div>
 
-      <div className="mt-4 flex justify-between">
+      {/* Action Buttons */}
+      <div className="mt-4 flex flex-col sm:flex-row gap-2 justify-center sm:justify-between">
         <button 
           onClick={() => handleAccept(selectedBooking.booking_id)} 
-          className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full sm:w-auto"
         >
           Accept
         </button>
         <button 
           onClick={() => handleReject(selectedBooking.booking_id)} 
-          className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full sm:w-auto"
         >
           Reject
         </button>
         <button 
           onClick={closeModal} 
-          className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+          className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 w-full sm:w-auto"
         >
           Close
         </button>
@@ -259,6 +256,7 @@ const CleanerBookingDetails = () => {
     </div>
   </div>
 )}
+
 
     </div>
   );

@@ -17,7 +17,7 @@ const CTASection = () => {
   // Close the modal
   const handleCloseModal = () => {
     setShowModal(false);
-    toast.success('Form closed successfully'); // Toast notification when modal is closed
+     // Toast notification when modal is closed
   };
 
   return (

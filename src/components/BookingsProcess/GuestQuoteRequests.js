@@ -136,67 +136,36 @@ const GuestQuoteRequests = () => {
 </div>
 
 
-      {view === 'bids' && (
-        quotes.length === 0 ? (
-          <p className="text-gray-500">No available quotes for biddings.</p>
-        ) : (
-          <table className="w-full border border-gray-300">
-            <thead className="bg-gray-100">
-              <tr >
-                <th className="border border-gray-300 p-2">Service Type</th>
-                <th className="border border-gray-300 p-2">Location</th>
-                <th className="border border-gray-300 p-2">Budget Range</th>
-                <th className="border border-gray-300 p-2">Action</th>
-                <th className="border border-gray-300 p-2">Full Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {quotes.map((quote) => (
-                <tr key={quote.id} className="border border-gray-300">
-                  <td className="p-2">{quote.service_type}</td>
-                  <td className="p-2">{quote.full_name}</td>
-                  <td className="p-2">{quote.location}</td>
-                  <td className="p-2">₦{quote.budget_range}</td>
-              
-                  <td className="p-2">
-                    <button
-                      onClick={() => openModal(quote)}
-                      className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-                    >
-                      View Details
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )
-      )}
-{view === 'approved' && (
-  approvedBids.length === 0 ? (
-    <p className="text-gray-500">No approved bids available.</p>
+{view === 'bids' && (
+  quotes.length === 0 ? (
+    <p className="text-gray-500">No available quotes for biddings.</p>
   ) : (
-    <div className="overflow-x-auto">
-      <table className="min-w-full table-auto border-collapse border border-gray-300">
+    <div className="overflow-x-auto px-2 sm:px-4 lg:px-6">
+      <table className="min-w-full table-auto border border-gray-300">
         <thead className="bg-gray-100">
-        <tr className="bg-green-200 text-sm text-gray-600">
-            <th className="border border-gray-300 p-2 text-left">Phone Number</th>
-            <th className="border border-gray-300 p-2 text-left">Full Name</th>
-            <th className="border border-gray-300 p-2 text-left">Service Type</th>
-            <th className="border border-gray-300 p-2 text-left">Location</th>
-            <th className="border border-gray-300 p-2 text-left">Budget Range</th>
-            <th className="border border-gray-300 p-2 text-left">Approved Amount</th>
+          <tr className="bg-green-200 text-xs sm:text-sm text-gray-600">
+            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Service Type</th>
+            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Full Name</th>
+            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Location</th>
+            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Budget Range</th>
+            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Action</th>
           </tr>
         </thead>
         <tbody>
-          {approvedBids.map((bid) => (
-            <tr key={bid.id} className="border border-gray-300">
-              <td className="p-2 text-sm sm:text-base">{bid.phone_number}</td>
-              <td className="p-2 text-sm sm:text-base">{bid.full_name}</td>
-              <td className="p-2 text-sm sm:text-base">{bid.service_type}</td>
-              <td className="p-2 text-sm sm:text-base">{bid.location}</td>
-              <td className="p-2 text-sm sm:text-base">{bid.budget_range}</td>
-              <td className="p-2 text-sm sm:text-base">₦{bid.approved_amount}</td>
+          {quotes.map((quote) => (
+            <tr key={quote.id} className="border border-gray-300 hover:bg-gray-50 transition duration-200">
+              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.service_type}</td>
+              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.full_name}</td>
+              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.location}</td>
+              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">₦{quote.budget_range}</td>
+              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">
+                <button
+                  onClick={() => openModal(quote)}
+                  className="bg-green-600 text-white px-3 sm:px-4 py-1 sm:py-2 rounded hover:bg-green-700 transition duration-200"
+                >
+                  View Details
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -205,40 +174,76 @@ const GuestQuoteRequests = () => {
   )
 )}
 
+{view === 'approved' && (
+  approvedBids.length === 0 ? (
+    <p className="text-gray-500">No approved bids available.</p>
+  ) : (
+    <div className="overflow-x-auto px-2 sm:px-4 lg:px-6">
+  <table className="min-w-full table-auto border-collapse border border-gray-300">
+    <thead className="bg-gray-100">
+      <tr className="bg-green-200 text-xs sm:text-sm text-gray-600">
+        <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Phone Number</th>
+        <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Full Name</th>
+        <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Service Type</th>
+        <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Location</th>
+        <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Budget Range</th>
+        <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Approved Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {approvedBids.map((bid) => (
+        <tr key={bid.id} className="border border-gray-300 hover:bg-gray-50 transition duration-200">
+          <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{bid.phone_number}</td>
+          <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{bid.full_name}</td>
+          <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{bid.service_type}</td>
+          <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{bid.location}</td>
+          <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{bid.budget_range}</td>
+          <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">₦{bid.approved_amount}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+    
+  )
+)}
+
 
       {/* Modal */}
-      {modalOpen && selectedQuote && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg w-full max-w-lg">
-            <h2 className="text-xl font-semibold mb-4">Bid Details</h2>
-            <p><strong>Full Name:</strong> {selectedQuote.full_name}</p>
-            <p><strong>Description:</strong> {selectedQuote.description}</p>
-            <p><strong>Bid Amount:</strong>
-              <input
-                type="number"
-                value={bids[selectedQuote.id] || ''}
-                onChange={(e) => setBids((prev) => ({ ...prev, [selectedQuote.id]: e.target.value }))}
-                className="border border-gray-300 p-1 rounded w-full"
-                placeholder="Enter your bid"
-              />
-            </p>
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={() => handleBidSubmit(selectedQuote.id)}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
-              >
-                Submit Bid
-              </button>
-              <button
-                onClick={closeModal}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+     {/* Modal */}
+{modalOpen && selectedQuote && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 px-4">
+    <div className="bg-white p-4 sm:p-6 rounded-lg w-full max-w-lg sm:max-w-2xl">
+      <h2 className="text-lg sm:text-xl font-semibold mb-4">Bid Details</h2>
+      <p><strong>Full Name:</strong> {selectedQuote.full_name}</p>
+      <p><strong>Description:</strong> {selectedQuote.description}</p>
+      <p className="mt-2"><strong>Bid Amount:</strong></p>
+      <input
+        type="number"
+        value={bids[selectedQuote.id] || ''}
+        onChange={(e) => setBids((prev) => ({ ...prev, [selectedQuote.id]: e.target.value }))}
+        className="border border-gray-300 p-2 rounded w-full mt-1"
+        placeholder="Enter your bid"
+      />
+      <div className="flex justify-between mt-6">
+        <button
+          onClick={() => handleBidSubmit(selectedQuote.id)}
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 w-1/2 mr-2"
+        >
+          Submit Bid
+        </button>
+        <button
+          onClick={closeModal}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 w-1/2"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

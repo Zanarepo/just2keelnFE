@@ -64,43 +64,52 @@ const PaymentsSection = () => {
 
   return (
     <div className="payments-section mt-16">
-       <div className="payments-section mt-16"><ClientSchedules/> </div>
+      <div className="mt-16">
+        <ClientSchedules />
+      </div>
+  
       <h2 className="text-xl sm:text-2xl font-semibold text-center mt-4 sm:mt-6 mb-4 sm:mb-6 text-green-500">
-  Payment History
-</h2>
-<div className="overflow-x-auto px-4 sm:px-6 lg:px-8"></div>
-<table className="w-full bg-white border border-gray-300 rounded-lg">
-    <thead>
-    <tr className="bg-green-200 text-sm text-gray-600">
-        <th className="px-4 py-2 text-left">Payment Date</th>
-        <th className="px-4 py-2 text-left">Amount</th>
-        <th className="px-4 py-2 text-left">Payment Method</th>
-        <th className="px-4 py-2 text-left">Status</th>
-      </tr>
-    </thead>
-        <tbody>
-          {payments.length === 0 ? (
-            <tr>
-              <td colSpan="4" className="px-4 py-2 text-center">No payment history available.</td>
+        Payment History
+      </h2>
+  
+      <div className="overflow-x-auto px-4 sm:px-6 lg:px-8">
+        <table className="w-full bg-white border border-gray-300 rounded-lg min-w-[600px]">
+          <thead>
+            <tr className="bg-green-200 text-sm sm:text-base text-gray-600">
+              <th className="px-4 py-2 text-left">Payment Date</th>
+              <th className="px-4 py-2 text-left">Amount</th>
+              <th className="px-4 py-2 text-left">Payment Method</th>
+              <th className="px-4 py-2 text-left">Status</th>
             </tr>
-          ) : (
-            payments.map((payment) => (
-              <tr key={payment.payment_id} >
-                <td className="px-4 py-2">{new Date(payment.payment_date).toLocaleDateString()}</td>
-                <td className="px-4 py-2">${(payment.amount / 100).toFixed(2)}</td> {/* Assuming amount is in cents */}
-                <td className="px-4 py-2">{payment.payment_method}</td>
-                <td className="px-4 py-2">{payment.status}</td>
+          </thead>
+          <tbody>
+            {payments.length === 0 ? (
+              <tr>
+                <td colSpan="4" className="px-4 py-2 text-center">No payment history available.</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-     
+            ) : (
+              payments.map((payment) => (
+                <tr key={payment.payment_id} className="hover:bg-gray-50 transition duration-200">
+                  <td className="px-4 py-2">{new Date(payment.payment_date).toLocaleDateString()}</td>
+                  <td className="px-4 py-2">${(payment.amount / 100).toFixed(2)}</td> {/* Assuming amount is in cents */}
+                  <td className="px-4 py-2">{payment.payment_method}</td>
+                  <td className="px-4 py-2">{payment.status}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+  
       {/* Toast Container */}
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
-       <div className="payments-section mt-16"><ReviewPromptSection/></div>
+  
+      <div className="payments-section mt-16">
+        <ReviewPromptSection />
+      </div>
     </div>
   );
+  
 };
 
 export default PaymentsSection;

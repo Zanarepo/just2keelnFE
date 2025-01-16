@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+//import { toast, ToastContainer } from 'react-toastify';  // Correctly importing toast and ToastContainer
+import 'react-toastify/dist/ReactToastify.css';  // Importing the CSS for react-toastify
+
 import BidDetails from './BidDetails';
 import GuestQuoteRequests from './GuestQuoteRequests';
 import CleanerBids from '../QuotesDashboard/CleanerClientsBids';
@@ -7,6 +10,11 @@ import CleanerBookingDetails from '../CleanersDashboard/CleanerBookingDetails';
 
 const GuestandClientQuotesDashboard = () => {
   const [activeTab, setActiveTab] = useState('GuestQuoteRequests');
+
+  const handleTabChange = (tabName) => {
+    setActiveTab(tabName);
+  // Triggering the toast notification when the tab changes
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -30,7 +38,7 @@ const GuestandClientQuotesDashboard = () => {
       <div className="flex border-b border-gray-300 text-sm font-medium">
         {/* Guest Quote Requests Tab */}
         <button
-          onClick={() => setActiveTab('GuestQuoteRequests')}
+          onClick={() => handleTabChange('GuestQuoteRequests')}
           className={`flex-1 py-2 text-center ${
             activeTab === 'GuestQuoteRequests' ? 'border-b-2 border-green-600 text-green-600' : 'text-gray-600'
           }`}
@@ -40,7 +48,7 @@ const GuestandClientQuotesDashboard = () => {
 
         {/* Clients Bids Tab */}
         <button
-          onClick={() => setActiveTab('CleanerBids')}
+          onClick={() => handleTabChange('CleanerBids')}
           className={`flex-1 py-2 text-center ${
             activeTab === 'CleanerBids' ? 'border-b-2 border-green-600 text-green-600' : 'text-gray-600'
           }`}
@@ -50,7 +58,7 @@ const GuestandClientQuotesDashboard = () => {
 
         {/* Clients Bookings Tab */}
         <button
-          onClick={() => setActiveTab('ClientsBookings')}
+          onClick={() => handleTabChange('ClientsBookings')}
           className={`flex-1 py-2 text-center ${
             activeTab === 'ClientsBookings' ? 'border-b-2 border-green-600 text-green-600' : 'text-gray-600'
           }`}
@@ -61,6 +69,9 @@ const GuestandClientQuotesDashboard = () => {
 
       {/* Tab Content */}
       <div className="mt-4">{renderTabContent()}</div>
+
+      {/* Toast Notifications */}
+              
     </div>
   );
 };
