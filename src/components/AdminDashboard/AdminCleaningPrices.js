@@ -179,13 +179,13 @@ const AdminCleaningPrices = () => {
             required
           />
         </div>
-        <button type="submit" className="mt-4 bg-blue-500 text-white px-8 py-3 rounded-lg">
+        <button type="submit" className="mt-4 bg-green-600 text-white px-8 py-3 rounded-lg">
           {editingId ? 'Update Price' : 'Add Price'}
         </button>
       </form>
 
       <div className="mb-4">
-        <h3 className="text-xl font-bold mb-2">Search Filters</h3>
+        <h3 className="text-lg sm:text-xl font-bold text-center text-green-600 p-6">Search Filters</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <input
             type="text"
@@ -223,10 +223,10 @@ const AdminCleaningPrices = () => {
       </div>
 
       <div className="cleaning-prices-list">
-        <h3 className="text-2xl font-bold mb-4">All Cleaning Prices</h3>
+        <h3 className="text-lg sm:text-xl font-bold text-center text-green-600 p-6">All Cleaning Prices</h3>
         <table className="w-full border-collapse text-center">
           <thead>
-            <tr className="bg-green-500 text-white">
+          <tr className="bg-green-200 text-xs sm:text-sm text-gray-600">
               <th className="border-b p-2">ID</th>
               <th className="border-b p-2">Building Type</th>
               <th className="border-b p-2">Condition</th>
@@ -248,7 +248,7 @@ const AdminCleaningPrices = () => {
                 <td className="border-b p-2 flex justify-center space-x-2">
                   <button
                     onClick={() => handleEdit(price)}
-                    className="text-blue-500 hover:underline"
+                    className="text-green-500 hover:underline"
                   >
                     Edit
                   </button>

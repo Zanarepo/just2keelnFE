@@ -13,6 +13,7 @@ import  AdminGuestBooking from "../AdminDashboard/AdminGuestBooking"
 import AdminCleanerSchedules from "../AdminDashboard/AdminCleanerSchedules"
 import GeneralDashboards from "../AdminDashboard/GeneralDashboards"
 import AdminCleaningPrices from "../AdminDashboard/AdminCleaningPrices"
+import AdminCleaningSubscriptions from "../AdminDashboard/AdminCleaningSubscriptions"
   
 
 
@@ -28,7 +29,7 @@ const AdminLayout = () => {
     { name: "Home", icon: <HomeIcon className="h-6 w-6" />, route: "/" },
     { name: "Squads DB", icon: <UserIcon className="h-6 w-6" />, route: "/providers-dashboard" },
     { name: "Client Dashboard", icon: <UserIcon className="h-6 w-6" />, route: "/client-dashboard" },
-    { name: "Admin", icon: <UserIcon className="h-6 w-6" />, route: "/admin" },
+    { name: "Subscriptions Prices", icon: <UserIcon className="h-6 w-6" />, route: "/admin-subscriptionsupdates" },
     { name: "Activities DB", icon: <CogIcon className="h-6 w-6" />, route: "/general-dashboards" },
     { name: "Prices Dashboard", icon: <CogIcon className="h-6 w-6" />, route: "/admin-cleaningprice" },
     { name: "Logout", icon: <FaSignOutAlt className="h-6 w-6" />, route: "/logout" },  // Updated logout icon
@@ -116,8 +117,7 @@ const AdminLayout = () => {
         <Route path="/admin-guestbooking" element={<AdminGuestBooking/>} />
         <Route path="admin-cleanersschedule" element={<AdminCleanerSchedules/>} />
         <Route path="admin-cleaningprice" element={<AdminCleaningPrices/>} />
-
-
+        <Route path="/admin-subscriptionsupdates" element={<AdminCleaningSubscriptions/>} />      
 
 
 

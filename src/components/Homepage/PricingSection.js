@@ -159,25 +159,30 @@ const PreSubscribeComponent = () => {
             </select>
           </div>
 
-          {/* Number of Rooms */}
-          <div>
-            <label className="block text-sm font-semibold mb-2">Number of Rooms</label>
-            <select
-              value={selectedNumRooms}
-              onChange={(e) => {
-                setSelectedNumRooms(e.target.value);
-                setLastActivity(Date.now()); // Reset the inactivity timer
-              }}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              <option value="">Select No: Rooms</option>
-              {filteredSubscriptions.map((subscription) => (
-                <option key={subscription.id} value={subscription.num_rooms}>
-                  {subscription.num_rooms}
-                </option>
-              ))}
-            </select>
-          </div>
+        {/* Number of Rooms */}
+<div className="mb-4">
+  <label className="block text-sm font-semibold text-gray-700 mb-2">
+    Number of Rooms
+  </label>
+  <select
+    value={selectedNumRooms}
+    onChange={(e) => {
+      setSelectedNumRooms(e.target.value);
+      setLastActivity(Date.now()); // Reset the inactivity timer
+    }}
+    className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+  >
+    <option value="">Select No: Rooms</option>
+    {/* Filter unique num_rooms and render */}
+    {[...new Set(filteredSubscriptions.map((sub) => sub.num_rooms))]
+      .sort((a, b) => a - b) // Optional: Sort numbers in ascending order
+      .map((numRooms, index) => (
+        <option key={index} value={numRooms}>
+          {numRooms}
+        </option>
+      ))}
+  </select>
+</div>
 
           {/* Cleaning Frequency */}
           <div>
@@ -226,7 +231,7 @@ const PreSubscribeComponent = () => {
       {selectedSubscription && (
         <div className="mt-8 flex justify-center">
           <div className="p-6 border border-gray-300 rounded-lg shadow-lg max-w-sm text-center">
-            <h3 className="text-lg font-bold mb-4">Monthly Subscription For:</h3>
+            <h3 className="text-lg font-bold mb-4"> Monthly Subscription For:</h3>
             <p className="mb-2">
               <strong>Building Type:</strong> {selectedSubscription.building_type}
             </p>
@@ -238,7 +243,7 @@ const PreSubscribeComponent = () => {
               {frequencies.find((f) => f.id === selectedSubscription.frequency_id)?.name}
             </p>
             <p className="mb-4 text-xl font-semibold text-green-600">
-              <strong>Price:</strong> ₦{selectedSubscription.price}
+              <strong>Price Estimate:</strong> ₦{selectedSubscription.price}
             </p>
             <p className="mb-4">
               <strong>Description:</strong> {selectedSubscription.description}

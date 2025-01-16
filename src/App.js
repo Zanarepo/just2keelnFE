@@ -2,6 +2,8 @@ import React from 'react'; // Ensure React is imported
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/Auth/SignUp';
 import Login from './components/Auth/Login';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 //import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 //import Dashboard from "./components/Auth/Dashboard";
@@ -82,7 +84,7 @@ import Subsription from "./components/Homepage/Subsription"
 import ForgotPasswordForm from './components/CustomeAuth/ForgotPasswordForm';
 import ResetPasswordForm from './components/CustomeAuth/ResetPasswordForm';
 import GuestQuoteBidding from './components/QuotesDashboard/GuestQuoteBidding';
-
+import AdminCleaningSubscriptions from './components/AdminDashboard/AdminCleaningSubscriptions'
 
 
 
@@ -132,6 +134,7 @@ function App() {
       <Route path="admin-cleanersschedule" element={<AdminCleanerSchedules/>} />
       <Route path="general-dashboards" element={<GeneralDashboards/>} />
       <Route path="/admin-cleaningprice" element={<AdminCleaningPrices/>} />
+      <Route path="admin-subscriptionsupdates" element={<AdminCleaningSubscriptions/>} />
       
 
 </Route>

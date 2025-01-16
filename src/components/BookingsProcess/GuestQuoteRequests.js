@@ -115,62 +115,61 @@ const GuestQuoteRequests = () => {
 
   return (
     <div className="p-6">
-      <GuestBookingsComponent/>
+      <GuestBookingsComponent />
       <ToastContainer />
       <div className="mb-4 flex justify-between items-center flex-wrap">
-  <h1 className="text-lg sm:text-xl font-bold text-center text-green-600 p-6">My Guest Quote Requests</h1>
-  <div className="w-full sm:w-auto flex justify-start sm:justify-end mt-4 sm:mt-0">
-    <button
-      onClick={() => setView('bids')}
-      className={`px-4 py-2 mr-2 mb-2 sm:mb-0 rounded ${view === 'bids' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
-    >
-      Bids
-    </button>
-    <button
-      onClick={() => setView('approved')}
-      className={`px-4 py-2 rounded ${view === 'approved' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
-    >
-      Approved Bids
-    </button>
-  </div>
-</div>
+        <h1 className="text-lg sm:text-xl font-bold text-center text-green-600 p-6">My Guest Quote Requests</h1>
+        <div className="w-full sm:w-auto flex justify-start sm:justify-end mt-4 sm:mt-0">
+          <button
+            onClick={() => setView('bids')}
+            className={`px-4 py-2 mr-2 mb-2 sm:mb-0 rounded ${view === 'bids' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+          >
+            Bids
+          </button>
+          <button
+            onClick={() => setView('approved')}
+            className={`px-4 py-2 rounded ${view === 'approved' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+          >
+            Approved Bids
+          </button>
+        </div>
+      </div>
 
-
-{view === 'bids' && (
-  quotes.length === 0 ? (
-    <p className="text-gray-500">No available quotes for biddings.</p>
-  ) : (
-    <div className="overflow-x-auto px-2 sm:px-4 lg:px-6">
-      <table className="min-w-full table-auto border border-gray-300">
-        <thead className="bg-gray-100">
-          <tr className="bg-green-200 text-xs sm:text-sm text-gray-600">
-            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Service Type</th>
-            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Full Name</th>
-            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Location</th>
-            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Budget Range</th>
-            <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {quotes.map((quote) => (
-            <tr key={quote.id} className="border border-gray-300 hover:bg-gray-50 transition duration-200">
-              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.service_type}</td>
-              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.full_name}</td>
-              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.location}</td>
-              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">₦{quote.budget_range}</td>
-              <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">
-                <button
-                  onClick={() => openModal(quote)}
-                  className="bg-green-600 text-white px-3 sm:px-4 py-1 sm:py-2 rounded hover:bg-green-700 transition duration-200"
-                >
-                  View Details
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+      {view === 'bids' && (
+      quotes.length === 0 ? (
+        <p className="text-gray-500">No available quotes for biddings.</p>
+      ) : (
+        <div className="overflow-x-auto px-2 sm:px-4 lg:px-6">
+          <table className="min-w-full table-auto border border-gray-300">
+            <thead className="bg-gray-100">
+              <tr className="bg-green-200 text-xs sm:text-sm text-gray-600">
+                <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Service Type</th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Full Name</th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Location</th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Budget Range</th>
+                <th className="border border-gray-300 px-2 sm:px-4 py-2 text-left">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {quotes.map((quote) => (
+                <tr key={quote.id} className="border border-gray-300 hover:bg-gray-50 transition duration-200">
+                  <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.service_type}</td>
+                  <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.full_name}</td>
+                  <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">{quote.location}</td>
+                  <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">₦{quote.budget_range}</td>
+                  <td className="px-2 sm:px-4 py-2 text-xs sm:text-sm">
+                    <button
+                      onClick={() => openModal(quote)}
+                      className="bg-green-600 text-white px-3 sm:px-4 py-1 sm:py-2 rounded hover:bg-green-700 transition duration-200"
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
   )
 )}
 
