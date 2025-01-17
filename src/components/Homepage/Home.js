@@ -12,12 +12,22 @@ import SearchAndBookComponent from "../QuotesDashboard/SearchAndBookComponent"; 
 import CleaningPricesForm from "../Homepage/CleaningPricesForm"; // Import the CleaningPricesForm component
 import CleaningServicesSlideshow from './CleaningServicesSlideshow'; // Import the CleaningServicesSlideshow component
 import CleaningOfferingsSlideshow from './CleaningOfferingsSlideshow'; // Import the CleaningOfferingsSlideshow component
+import PartnershipComponent from './PartnershipComponent'
+
+
+
+
+
+
+
+
+
 
 const HomePage = () => {
   return (
     <div className="home-page">
       <HeroSection />
-      
+      <CTASection />
       {/* Cleaning Services Slideshow added here */}
       <section className="py-12 bg-white-100">
         <div className="container mx-auto">
@@ -49,10 +59,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      <CTASection />
+      
    
       <FeaturesKleen />
       <PricingSection />
+      <PartnershipComponent/>
      {/* <TestimonialsSection />  ToastContainer added here */}
       <FAQSection />
 

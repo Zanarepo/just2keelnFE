@@ -222,20 +222,20 @@ const AdminCleaningPrices = () => {
         </div>
       </div>
 
-      <div className="cleaning-prices-list">
-        <h3 className="text-lg sm:text-xl font-bold text-center text-green-600 p-6">All Cleaning Prices</h3>
-        <table className="w-full border-collapse text-center">
-          <thead>
-          <tr className="bg-green-200 text-xs sm:text-sm text-gray-600">
-              <th className="border-b p-2">ID</th>
-              <th className="border-b p-2">Building Type</th>
-              <th className="border-b p-2">Condition</th>
-              <th className="border-b p-2">Rooms</th>
-              <th className="border-b p-2">Price (₦)</th>
-              <th className="border-b p-2">Discount (%)</th>
-              <th className="border-b p-2">Actions</th>
-            </tr>
-          </thead>
+      <div className="overflow-x-auto">
+    <table className="w-full border-collapse text-center">
+      <thead>
+        <tr className="bg-green-200 text-xs sm:text-sm text-gray-600">
+          <th className="border-b p-2">ID</th>
+          <th className="border-b p-2">Building Type</th>
+          <th className="border-b p-2">Condition</th>
+          <th className="border-b p-2">Rooms</th>
+          <th className="border-b p-2">Price (₦)</th>
+          <th className="border-b p-2">Discount (%)</th>
+          <th className="border-b p-2">Actions</th>
+        </tr>
+      </thead>
+
           <tbody>
             {filteredPrices.map((price) => (
               <tr key={price.id}>
