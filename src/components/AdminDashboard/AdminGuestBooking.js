@@ -57,12 +57,15 @@ const AdminQuoteRequests = () => {
     return <div>Loading quote requests...</div>;
   }
 
+
+
+
   return (
-    <div className="p-4">
-      <h2 className="text-lg sm:text-xl font-bold text-center text-green-600 mt-4 p-4">
+    <div className="w-full p-0">
+      <h2 className="text-lg sm:text-xl font-bold text-center text-green-600 mt-4">
         Guest Bookings Requests
       </h2>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="min-w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
@@ -103,6 +106,11 @@ const AdminQuoteRequests = () => {
           </tbody>
         </table>
       </div>
+
+
+
+
+
 
       {/* Modal for viewing request details */}
       {selectedRequest && (

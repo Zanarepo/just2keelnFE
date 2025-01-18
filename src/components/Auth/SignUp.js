@@ -7,7 +7,7 @@ const SignUp = () => {
   const [role, setRole] = useState('');
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
+    <div className="">
       <div>
         <h2 className="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mb-6">
           {step === 1 ? 'Select Account Type' : 'Complete Registration'}

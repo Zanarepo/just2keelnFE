@@ -31,7 +31,7 @@ const HeroSection = () => {
   Welcome to Just2Kleen
 </h1>
 
-        <p className="text-base sm:text-lg md:text-xl mb-6">
+        <p className="text-base sm:text-lg md:text-xl  text-center mb-6">
           Get affordable and professional cleaning services for homes and offices.
           Whether you&apos;re a student, a working professional, or a company, we
           have solutions for all your cleaning needs.

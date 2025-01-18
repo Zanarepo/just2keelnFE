@@ -111,7 +111,7 @@ const ClientsQuotesandBookings = () => {
   if (loading) return <p>Loading bids...</p>;
 
   return (
-    <div className="p-4">
+    <div className="w-full p-0">
       
       <h2 className="text-lg sm:text-xl font-bold text-center text-green-600 p-4">RFQs Dashboard (cleaners & clients)</h2>
       <div className="overflow-x-auto">

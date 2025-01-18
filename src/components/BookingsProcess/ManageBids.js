@@ -103,7 +103,7 @@ const BidManagement = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="w-full p-0">
       <ToastContainer />
       <h1 className="text-lg sm:text-xl font-bold text-center text-green-600 p-4">Guests Bids Management</h1>
 

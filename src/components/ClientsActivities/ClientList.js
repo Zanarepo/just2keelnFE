@@ -37,20 +37,20 @@ const ClientList = () => {
     return <div className="text-center text-red-500">{error}</div>;
   }
   return (
-    <div className="min-h-screen bg-white-100">
+    <div className="overflow-x-auto w-full">
       <h2 className="text-2xl font-semibold text-green-500 mb-4 text-center">Clients List</h2>
       
       <div className="overflow-x-auto">
-        <table className="w-full table-auto border border-gray-200">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="py-2 text-left border-b border-gray-300">Full Name</th>
-              <th className="py-2 text-left border-b border-gray-300">Email</th>
-              <th className="py-2 text-left border-b border-gray-300">Phone</th>
-              <th className="py-2 text-left border-b border-gray-300">Address</th>
-              <th className="py-2 text-left border-b border-gray-300">Created At</th>
-            </tr>
-          </thead>
+  <table className="w-full table-auto border border-gray-200">
+    <thead>
+      <tr className="bg-gray-100">
+        <th className="py-2 px-4 text-left border-b border-gray-300">Full Name</th>
+        <th className="py-2 px-4 text-left border-b border-gray-300">Email</th>
+        <th className="py-2 px-4 text-left border-b border-gray-300">Phone</th>
+        <th className="py-2 px-4 text-left border-b border-gray-300">Address</th>
+        <th className="py-2 px-4 text-left border-b border-gray-300">Created At</th>
+      </tr>
+    </thead>
           <tbody>
             {clients.map((client) => (
               <tr key={client.id} className="border-b">

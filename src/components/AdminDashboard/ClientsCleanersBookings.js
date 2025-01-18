@@ -79,7 +79,7 @@ const BookingsDashboard = () => {
   if (loading) return <p>Loading bookings...</p>;
 
   return (
-    <div className="p-4">
+    <div className="w-full p-0">
       <h2 className="text-lg sm:text-xl font-bold text-center text-green-600 p-4">Bookings Dashboard</h2>
       <div className="overflow-x-auto">
       <table className="min-w-full table-auto border-collapse">

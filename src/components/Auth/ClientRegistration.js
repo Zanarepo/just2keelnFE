@@ -52,7 +52,7 @@ const ClientRegistration = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-white-100">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
           Register as a Client
